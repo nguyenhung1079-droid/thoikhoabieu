@@ -3,649 +3,519 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f5a400">
-<title>Lịch học của Nguyễn Tuấn Anh</title>
+<meta name="theme-color" content="#f4a300">
+<title>Lịch học cá nhân - Nguyễn Tuấn Anh</title>
 
 <style>
 :root{
-    --orange:#f5a400;
-    --orange-dark:#e29400;
-    --orange-soft:#fff7e6;
-    --border:#ececec;
-    --text:#202124;
-    --muted:#6f7378;
-    --bg:#f7f8fa;
-    --white:#fff;
-    --shadow:0 8px 30px rgba(0,0,0,.06);
-    --radius:22px;
+  --orange:#f4a300;
+  --orange2:#df8f00;
+  --soft:#fff7e5;
+  --green:#8bd34f;
+  --green-soft:#f1fae8;
+  --blue:#4d8fe8;
+  --blue-soft:#eef5ff;
+  --text:#202124;
+  --muted:#70757a;
+  --bg:#f6f7f9;
+  --white:#fff;
+  --border:#e6e7e9;
+  --shadow:0 8px 28px rgba(0,0,0,.06);
 }
 
 *{box-sizing:border-box}
-
 html{scroll-behavior:smooth}
-
 body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    color:var(--text);
-    background:var(--bg);
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
-
 a{text-decoration:none}
 
 .page{
-    max-width:1180px;
-    margin:0 auto;
-    padding:28px 22px 110px;
+  max-width:1100px;
+  margin:auto;
+  padding:20px 18px 105px;
 }
 
 /* HEADER */
 .header{
-    background:linear-gradient(135deg,#fffaf0,#fff);
-    border:1px solid #f2dfb0;
-    border-radius:28px;
-    padding:28px;
-    margin-bottom:30px;
-    box-shadow:var(--shadow);
+  background:linear-gradient(135deg,#fffaf0,#fff);
+  border:1px solid #f0d58d;
+  border-radius:26px;
+  padding:24px;
+  box-shadow:var(--shadow);
+  margin-bottom:25px;
 }
-
-.header-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
-
 .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    padding:8px 12px;
-    border-radius:999px;
-    background:var(--orange-soft);
-    color:var(--orange-dark);
-    font-size:14px;
-    font-weight:700;
+  display:inline-block;
+  background:var(--soft);
+  color:var(--orange2);
+  border-radius:99px;
+  padding:7px 12px;
+  font-size:13px;
+  font-weight:800;
 }
-
 h1{
-    margin:12px 0 6px;
-    font-size:clamp(30px,4vw,44px);
-    line-height:1.1;
+  margin:12px 0 5px;
+  font-size:clamp(29px,5vw,42px);
 }
-
-.subtitle{
-    color:var(--muted);
-    font-size:17px;
-}
-
-/* DESKTOP NAV */
-.desktop-nav{
-    display:flex;
-    gap:8px;
-    background:#fff;
-    border:1px solid var(--border);
-    padding:7px;
-    border-radius:16px;
-}
-
-.desktop-nav a{
-    color:#777;
-    padding:10px 15px;
-    border-radius:11px;
-    font-size:14px;
-    font-weight:600;
-}
-
-.desktop-nav a.active,
-.desktop-nav a:hover{
-    color:var(--orange-dark);
-    background:var(--orange-soft);
-}
+.subtitle{color:var(--muted);font-size:15px}
 
 /* SECTION */
-.section{
-    margin-bottom:34px;
-}
-
+.section{margin-bottom:30px}
 .section-head{
-    display:flex;
-    align-items:end;
-    justify-content:space-between;
-    margin:0 0 15px;
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:14px;
 }
+.section-title{font-size:27px;margin:0}
+.section-note{color:var(--muted);font-size:14px}
 
-.section-title{
-    font-size:28px;
-    margin:0;
+/* IMPORTANT WEEKLY */
+.weekly-banner{
+  background:linear-gradient(135deg,#fff1c7,#fffaf0);
+  border:2px solid #f2c45f;
+  border-radius:20px;
+  padding:16px 18px;
+  margin-bottom:16px;
 }
-
-.section-note{
-    color:var(--muted);
-    font-size:14px;
-}
+.weekly-banner strong{color:#c77d00}
 
 /* CARDS */
 .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
-
 .card{
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:22px;
-    box-shadow:var(--shadow);
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:19px;
+  box-shadow:var(--shadow);
 }
-
-.card.highlight{
-    border-color:#f2d58e;
-    background:linear-gradient(180deg,#fffdf8,#fff);
-}
-
-.card-head{
-    display:flex;
-    gap:13px;
-    align-items:flex-start;
-}
-
+.card-head{display:flex;gap:12px;align-items:flex-start}
 .icon{
-    width:46px;
-    height:46px;
-    flex:0 0 46px;
-    display:grid;
-    place-items:center;
-    border-radius:15px;
-    background:var(--orange-soft);
-    font-size:24px;
+  width:44px;height:44px;flex:0 0 44px;
+  display:grid;place-items:center;
+  border-radius:14px;
+  background:var(--soft);
+  font-size:22px;
 }
-
-.card-title{
-    font-size:20px;
-    line-height:1.25;
-    font-weight:750;
-    margin:2px 0 5px;
+.title{font-size:19px;font-weight:750;line-height:1.25}
+.meta{
+  margin-top:4px;
+  color:var(--orange2);
+  font-size:12px;
+  font-weight:800;
 }
-
-.frequency{
-    color:var(--orange-dark);
-    font-size:13px;
-    font-weight:700;
-}
-
 .time{
-    margin:20px 0 8px;
-    font-size:18px;
-    font-weight:650;
+  font-size:17px;
+  font-weight:700;
+  margin:18px 0 8px;
 }
-
-.student{
-    display:inline-block;
-    padding:6px 10px;
-    border:1px solid #ffd36a;
-    background:#fffaf0;
-    color:#d99000;
-    border-radius:8px;
-    font-size:14px;
-    font-weight:600;
+.detail{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
 }
-
-.join{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-top:20px;
+.btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  min-height:42px;
+  padding:9px 14px;
+  border-radius:11px;
+  background:var(--orange);
+  color:#fff;
+  font-weight:750;
+  font-size:14px;
+  margin-top:15px;
 }
+.btn:hover{background:var(--orange2)}
 
-.join-label{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.join-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-    min-height:42px;
-    padding:10px 15px;
-    border-radius:12px;
-    background:var(--orange);
-    color:#fff;
-    font-size:14px;
-    font-weight:750;
-    box-shadow:0 5px 14px rgba(245,164,0,.22);
-    transition:.2s;
-}
-
-.join-btn:hover{
-    background:var(--orange-dark);
-    transform:translateY(-1px);
-}
-
-/* WEEKLY */
+/* WEEKLY CARDS */
 .weekly-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
 }
-
 .weekly-card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:22px;
-    box-shadow:var(--shadow);
+  background:#fff;
+  border:2px solid #f1cf78;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+.day-label{
+  display:inline-block;
+  background:var(--orange);
+  color:#fff;
+  border-radius:99px;
+  padding:7px 11px;
+  font-size:12px;
+  font-weight:850;
+  margin-bottom:15px;
+}
+.weekly-card.important{
+  border-color:#efb92f;
+  background:linear-gradient(180deg,#fff9e9,#fff);
+}
+.weekly-card.important .day-label{background:#df8f00}
+.weekly-time{
+  font-size:20px;
+  font-weight:800;
+  margin:16px 0 5px;
 }
 
-/* WEEKLY EMPHASIS */
-.weekly-section .section-title{color:#c77f00}
-.weekly-card{border:2px solid #f3cf76;background:linear-gradient(180deg,#fffaf0 0%,#fff 100%)}
-.weekly-day{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;margin-bottom:13px;border-radius:999px;background:#f5a400;color:#fff;font-size:14px;font-weight:800}
-.weekly-card .time{font-size:20px;color:#222;margin-top:15px}
-/* NOTICE */
-.notice{
-    margin-top:20px;
-    padding:16px 18px;
-    border-radius:16px;
-    background:#fff;
-    border:1px dashed #e5d2a4;
-    color:#666;
-    font-size:14px;
-    line-height:1.55;
+/* SCHOOL */
+.school-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.school-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:16px;
+}
+.school-day{
+  color:#333;
+  font-weight:800;
+  margin-bottom:7px;
+}
+.school-time{
+  color:var(--blue);
+  font-weight:750;
+  font-size:14px;
+}
+.school-subject{
+  margin-top:8px;
+  font-size:16px;
+  font-weight:700;
+}
+.school-note{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
 }
 
-/* FOOTER */
-.footer{
-    text-align:center;
-    color:#999;
-    font-size:13px;
-    padding:18px 0 0;
+
+/* SCHOOL TIMETABLE */
+.school-table-wrap{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+}
+.school-table{
+  width:100%;
+  min-width:780px;
+  border-collapse:collapse;
+  font-size:13px;
+}
+.school-table th,
+.school-table td{
+  border:1px solid #e4e5e7;
+  padding:11px 8px;
+  text-align:center;
+  vertical-align:middle;
+}
+.school-table th{
+  background:#f4f5f6;
+  font-weight:800;
+}
+.school-table td:first-child{
+  background:#fafafa;
+  font-weight:750;
+  white-space:nowrap;
+}
+.school-table small{
+  color:#777;
+  font-size:11px;
+}
+.school-table .part td{
+  background:var(--green);
+  color:#1d5d10;
+  font-weight:900;
+  font-size:14px;
+  letter-spacing:.3px;
+}
+.school-table strong{
+  color:#202124;
 }
 
-/* MOBILE BOTTOM NAV */
+/* NOTE */
+.note{
+  background:#fff;
+  border:1px dashed #d9dadd;
+  border-radius:17px;
+  padding:16px;
+  color:#666;
+  line-height:1.55;
+  font-size:14px;
+}
+
+/* NAV */
+.desktop-nav{
+  display:flex;
+  gap:7px;
+  margin-top:18px;
+}
+.desktop-nav a{
+  color:#777;
+  background:#fff;
+  border:1px solid var(--border);
+  padding:9px 13px;
+  border-radius:10px;
+  font-size:13px;
+  font-weight:650;
+}
+.desktop-nav a:hover{color:var(--orange2);background:var(--soft)}
+
 .mobile-nav{
-    display:none;
+  display:none;
 }
 
-/* TABLET */
-@media (max-width:900px){
-    .grid{grid-template-columns:repeat(2,1fr)}
+/* MOBILE */
+@media(max-width:850px){
+  .grid{grid-template-columns:1fr}
 }
 
-/* PHONE */
-@media (max-width:640px){
-    body{background:#fff}
-
-    .page{
-        padding:14px 14px 100px;
-    }
-
-    .header{
-        padding:20px;
-        border-radius:22px;
-        margin-bottom:25px;
-    }
-
-    .header-top{
-        display:block;
-    }
-
-    .desktop-nav{display:none}
-
-    h1{font-size:30px}
-    .subtitle{font-size:15px}
-
-    .section-title{font-size:26px}
-
-    .section-head{
-        display:block;
-    }
-
-    .section-note{
-        margin-top:4px;
-    }
-
-    .grid,
-    .weekly-grid{
-        grid-template-columns:1fr;
-        gap:14px;
-    }
-
-    .card,
-    .weekly-card{
-        border-radius:20px;
-        padding:19px;
-    }
-
-    .card-title{
-        font-size:19px;
-    }
-
-    .time{
-        font-size:17px;
-        margin-top:17px;
-    }
-
-    .join{
-        margin-top:17px;
-    }
-
-    .join-btn{
-        min-height:44px;
-        padding:10px 17px;
-    }
-
-    .mobile-nav{
-        display:flex;
-        position:fixed;
-        z-index:20;
-        left:0;
-        right:0;
-        bottom:0;
-        height:76px;
-        padding-bottom:env(safe-area-inset-bottom);
-        background:rgba(255,255,255,.96);
-        backdrop-filter:blur(12px);
-        border-top:1px solid #eee;
-        box-shadow:0 -8px 25px rgba(0,0,0,.06);
-        justify-content:space-around;
-    }
-
-    .mobile-nav a{
-        flex:1;
-        text-align:center;
-        color:#999;
-        font-size:11px;
-        padding-top:10px;
-    }
-
-    .mobile-nav a.active{
-        color:var(--orange-dark);
-        font-weight:700;
-    }
-
-    .mobile-icon{
-        display:block;
-        font-size:22px;
-        line-height:24px;
-        margin-bottom:4px;
-    }
+@media(max-width:640px){
+  body{background:#fff}
+  .page{padding:12px 13px 95px}
+  .header{padding:19px;border-radius:21px}
+  .desktop-nav{display:none}
+  .section-title{font-size:25px}
+  .section-head{display:block}
+  .section-note{margin-top:4px}
+  .weekly-grid,.school-grid{grid-template-columns:1fr}
+  .card,.weekly-card{border-radius:19px}
+  .mobile-nav{
+    display:flex;
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:10;
+    height:72px;
+    padding-bottom:env(safe-area-inset-bottom);
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(12px);
+    border-top:1px solid #eee;
+    box-shadow:0 -7px 24px rgba(0,0,0,.06);
+  }
+  .mobile-nav a{
+    flex:1;text-align:center;color:#999;
+    padding-top:9px;font-size:10px;
+  }
+  .mobile-nav a.active{color:var(--orange2);font-weight:800}
+  .nav-icon{display:block;font-size:21px;line-height:24px;margin-bottom:3px}
 }
 </style>
 </head>
 
 <body>
-
 <main class="page">
 
-    <!-- HEADER -->
-    <header class="header" id="lich-hoc">
-        <div class="header-top">
+<header class="header" id="top">
+  <span class="badge">📚 LỊCH HỌC CÁ NHÂN</span>
+  <h1>Nguyễn Tuấn Anh</h1>
+  <div class="subtitle">Lịch học • Lộ trình huấn luyện • Học tập & phát triển</div>
 
-            <div>
-                <span class="badge">📚 LỊCH HỌC</span>
-                <h1>Nguyễn Tuấn Anh</h1>
-                <div class="subtitle">
-                    Lịch học hằng ngày và các lớp hàng tuần
-                </div>
-            </div>
+  <nav class="desktop-nav">
+    <a href="#hang-ngay">Hàng ngày</a>
+    <a href="#hang-tuan">Hàng tuần</a>
+    <a href="#truong">Ở trường</a>
+  </nav>
+</header>
 
-            <nav class="desktop-nav">
-                <a href="#hang-ngay" class="active">Hàng ngày</a>
-                <a href="#hang-tuan">Hàng tuần</a>
-                <a href="#luu-y">Lưu ý</a>
-            </nav>
+<!-- HÀNG NGÀY -->
+<section class="section" id="hang-ngay">
+  <div class="section-head">
+    <h2 class="section-title">📅 Hàng ngày</h2>
+    <div class="section-note">CLB Thể chất — linh hoạt sáng & tối</div>
+  </div>
 
+  <div class="grid">
+
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">🏃</div>
+        <div>
+          <div class="title">CLB Thể chất</div>
+          <div class="meta">HÀNG NGÀY • 30 PHÚT/BUỔI</div>
         </div>
-    </header>
+      </div>
+      <div class="time">🕠 05:30 – 06:00</div>
+      <div class="detail">Lựa chọn buổi sáng</div>
+      <a class="btn" href="https://meet.google.com/zzs-bxwi-hmp" target="_blank">Vào lớp →</a>
+    </article>
 
-
-    <!-- HÀNG NGÀY -->
-    <section class="section" id="hang-ngay">
-
-        <div class="section-head">
-            <h2 class="section-title">📅 Hàng ngày</h2>
-            <div class="section-note">Các buổi học lặp lại mỗi ngày</div>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">☀️</div>
+        <div>
+          <div class="title">CLB Thể chất</div>
+          <div class="meta">HÀNG NGÀY • 30 PHÚT/BUỔI</div>
         </div>
+      </div>
+      <div class="time">🕕 06:00 – 06:30</div>
+      <div class="detail">Lựa chọn buổi sáng</div>
+      <a class="btn" href="https://meet.google.com/ixr-rsxe-hsx" target="_blank">Vào lớp →</a>
+    </article>
 
-        <div class="grid">
-
-            <!-- A15 5h30 -->
-            <article class="card highlight">
-
-                <div class="card-head">
-                    <div class="icon">🏃</div>
-
-                    <div>
-                        <div class="card-title">
-                            A15 — Buổi sáng
-                        </div>
-                        <div class="frequency">
-                            HỌC HÀNG NGÀY
-                        </div>
-                    </div>
-                </div>
-
-                <div class="time">
-                    🕠 05:30 – 06:00
-                </div>
-
-                <span class="student">
-                    Nguyễn Tuấn Anh
-                </span>
-
-                <div class="join">
-                    <span class="join-label">Google Meet</span>
-                    <a class="join-btn"
-                       href="https://meet.google.com/zzs-bxwi-hmp"
-                       target="_blank">
-                        Vào lớp →
-                    </a>
-                </div>
-
-            </article>
-
-
-            <!-- A15 6h00 -->
-            <article class="card">
-
-                <div class="card-head">
-                    <div class="icon">☀️</div>
-
-                    <div>
-                        <div class="card-title">
-                            A15 — Buổi sáng 2
-                        </div>
-                        <div class="frequency">
-                            HỌC HÀNG NGÀY
-                        </div>
-                    </div>
-                </div>
-
-                <div class="time">
-                    🕕 06:00 – 06:30
-                </div>
-
-                <span class="student">
-                    Nguyễn Tuấn Anh
-                </span>
-
-                <div class="join">
-                    <span class="join-label">Google Meet</span>
-                    <a class="join-btn"
-                       href="https://meet.google.com/ixr-rsxe-hsx"
-                       target="_blank">
-                        Vào lớp →
-                    </a>
-                </div>
-
-            </article>
-
-
-            <!-- 21h15 -->
-            <article class="card">
-
-                <div class="card-head">
-                    <div class="icon">🌙</div>
-
-                    <div>
-                        <div class="card-title">
-                            Lớp buổi tối
-                        </div>
-                        <div class="frequency">
-                            HỌC HÀNG NGÀY
-                        </div>
-                    </div>
-                </div>
-
-                <div class="time">
-                    🌙 21:15 – 21:45
-                </div>
-
-                <span class="student">
-                    Nguyễn Tuấn Anh
-                </span>
-
-                <div class="join">
-                    <span class="join-label">Google Meet</span>
-                    <a class="join-btn"
-                       href="https://meet.google.com/zzs-bxwi-hmp"
-                       target="_blank">
-                        Vào lớp →
-                    </a>
-                </div>
-
-            </article>
-
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">🌙</div>
+        <div>
+          <div class="title">CLB Thể chất</div>
+          <div class="meta">HÀNG NGÀY • 30 PHÚT/BUỔI</div>
         </div>
-    </section>
+      </div>
+      <div class="time">🌙 21:15 – 21:45</div>
+      <div class="detail">Lựa chọn buổi tối</div>
+      <a class="btn" href="https://meet.google.com/zzs-bxwi-hmp" target="_blank">Vào lớp →</a>
+    </article>
 
+  </div>
 
-    <!-- HÀNG TUẦN -->
-    <section class="section weekly-section" id="hang-tuan">
+  <div class="note" style="margin-top:14px">
+    <strong>Linh hoạt:</strong> Có thể học buổi sáng, buổi tối hoặc cả sáng và tối tùy lịch của con.
+  </div>
+</section>
 
-        <div class="section-head">
-            <h2 class="section-title">🗓️ Hàng tuần</h2>
-            <div class="section-note">Mỗi lớp 1 buổi / tuần</div>
+<!-- HÀNG TUẦN -->
+<section class="section" id="hang-tuan">
+  <div class="section-head">
+    <h2 class="section-title">⭐ Hàng tuần</h2>
+    <div class="section-note">Hai lịch cố định cần nhớ</div>
+  </div>
+
+  <div class="weekly-banner">
+    🧠 <strong>THỨ 2 HÀNG TUẦN</strong> — Gia sư tâm lý / Mentor 1:1 là hoạt động ưu tiên quan trọng nhất.
+    <br>
+    🌱 <strong>CHỦ NHẬT HÀNG TUẦN</strong> — Phát triển năng lực & Kỹ năng sống.
+  </div>
+
+  <div class="weekly-grid">
+
+    <article class="weekly-card important">
+      <div class="day-label">🧠 THỨ 2 HÀNG TUẦN</div>
+
+      <div class="card-head">
+        <div class="icon">🧠</div>
+        <div>
+          <div class="title">Gia sư tâm lý / Mentor 1:1</div>
+          <div class="meta">QUAN TRỌNG NHẤT</div>
         </div>
+      </div>
 
-        <div class="weekly-grid">
+      <div class="weekly-time">🌙 20:30 – 21:00</div>
+      <div class="detail">30–45 phút / buổi • 1 buổi / tuần</div>
 
-            <!-- KỸ NĂNG SỐNG -->
-            <article class="weekly-card">
+      <a class="btn" href="https://meet.google.com/thm-zoxe-bti" target="_blank">
+        Vào lớp Mentor →
+      </a>
+    </article>
 
-                <div class="weekly-day">🌱 CHỦ NHẬT HÀNG TUẦN</div>
-                <div class="card-head">
-                    <div class="icon">❤️</div>
-                    <div>
-                        <div class="card-title">Phát triển năng lực & Kỹ năng sống</div>
-                        <div class="frequency">1 BUỔI / TUẦN</div>
-                    </div>
-                </div>
-                <div class="time">🕒 15:15 – 16:15 • 60 phút</div>
+    <article class="weekly-card">
+      <div class="day-label">🌱 CHỦ NHẬT HÀNG TUẦN</div>
 
-                <span class="student">
-                    Nguyễn Tuấn Anh
-                </span>
-
-                <div class="join">
-                    <span class="join-label">Google Meet</span>
-                    <a class="join-btn"
-                       href="https://meet.google.com/ebc-tmac-amq"
-                       target="_blank">
-                        Vào lớp →
-                    </a>
-                </div>
-
-            </article>
-
-
-            <!-- GIA SƯ TÂM LÝ -->
-            <article class="weekly-card">
-
-                <div class="weekly-day">🧠 THỨ 2 HÀNG TUẦN</div>
-                <div class="card-head">
-                    <div class="icon">🧠</div>
-                    <div>
-                        <div class="card-title">Gia sư tâm lý / Mentor 1:1</div>
-                        <div class="frequency">QUAN TRỌNG NHẤT • 1 BUỔI / TUẦN</div>
-                    </div>
-                </div>
-                <div class="time">🌙 20:30 – 21:00 • 30–45 phút</div>
-
-                <span class="student">
-                    Nguyễn Tuấn Anh
-                </span>
-
-                <div class="join">
-                    <span class="join-label">Google Meet</span>
-                    <a class="join-btn"
-                       href="https://meet.google.com/thm-zoxe-bti"
-                       target="_blank">
-                        Vào lớp →
-                    </a>
-                </div>
-
-            </article>
-
+      <div class="card-head">
+        <div class="icon">🌱</div>
+        <div>
+          <div class="title">Phát triển năng lực & Kỹ năng sống</div>
+          <div class="meta">1 BUỔI / TUẦN</div>
         </div>
-    </section>
+      </div>
 
+      <div class="weekly-time">🕒 15:15 – 16:15</div>
+      <div class="detail">60 phút / buổi</div>
 
-    <!-- LƯU Ý -->
-    <section class="section" id="luu-y">
+      <a class="btn" href="https://meet.google.com/ebc-tmac-amq" target="_blank">
+        Vào lớp Kỹ năng sống →
+      </a>
+    </article>
 
-        <div class="section-head">
-            <h2 class="section-title">📌 Lưu ý</h2>
-        </div>
+  </div>
+</section>
 
-        <div class="notice">
-            <strong>Nguyễn Tuấn Anh</strong> cần kiểm tra đúng giờ học,
-            chuẩn bị thiết bị trước giờ vào lớp và bấm
-            <strong>“Vào lớp →”</strong> để tham gia Google Meet.
-            <br><br>
-            Các lớp trong mục <strong>Hàng ngày</strong> được hiểu là lịch
-            lặp lại mỗi ngày. Các lớp trong mục <strong>Hàng tuần</strong>
-            học 1 buổi mỗi tuần theo lịch của gia sư/nhà trường.
-        </div>
+<!-- Ở TRƯỜNG -->
+<section class="section" id="truong">
+  <div class="section-head">
+    <h2 class="section-title">🏫 Thời khóa biểu</h2>
+    <div class="section-note">Lớp 6A5 • Trung tâm Tràng An</div>
+  </div>
 
-    </section>
+  <div class="school-table-wrap">
+    <table class="school-table">
+      <thead>
+        <tr>
+          <th>Thời gian</th>
+          <th>THỨ 2</th>
+          <th>THỨ 3</th>
+          <th>THỨ 4</th>
+          <th>THỨ 5</th>
+          <th>THỨ 6</th>
+          <th>THỨ 7</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="part">
+          <td colspan="7">BUỔI SÁNG</td>
+        </tr>
+        <tr>
+          <td>CA 1<br><small>7:30–9:00</small></td>
+          <td>—</td><td>—</td><td>—</td><td>—</td><td>TIẾNG ANH</td><td>—</td>
+        </tr>
+        <tr>
+          <td>CA 2<br><small>9:15–10:45</small></td>
+          <td>—</td><td>—</td><td><strong>Toán</strong><br><small>80 KẺ VẼ</small></td><td>—</td><td>—</td><td><strong>Toán</strong><br><small>80 KẺ VẼ</small></td>
+        </tr>
 
+        <tr class="part">
+          <td colspan="7">BUỔI CHIỀU</td>
+        </tr>
+        <tr>
+          <td>CA 1<br><small>13:30–15:00</small></td>
+          <td>—</td><td>—</td><td>—</td><td>TIẾNG ANH</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td>CA 2<br><small>15:15–16:45</small></td>
+          <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <div class="footer">
-        🎓 Học đúng giờ • Tập trung • Hoàn thành từng buổi học
-    </div>
+  <div class="note" style="margin-top:14px">
+    📌 <strong>Lịch học huấn luyện</strong> được bố trí riêng ở mục <strong>Hàng ngày</strong> và <strong>Hàng tuần</strong> phía trên.
+  </div>
+</section>
+
+<section class="section">
+  <div class="note">
+    <strong>📌 3 việc cần nhớ:</strong><br>
+    1. 🏃 CLB Thể chất: linh hoạt mỗi ngày, chọn khung giờ phù hợp.<br>
+    2. 🧠 <strong>THỨ 2 HÀNG TUẦN</strong>: ưu tiên Gia sư tâm lý / Mentor 1:1 lúc 20:30.<br>
+    3. 🌱 <strong>CHỦ NHẬT HÀNG TUẦN</strong>: Phát triển năng lực & Kỹ năng sống lúc 15:15.
+  </div>
+</section>
 
 </main>
 
-
-<!-- MOBILE NAV -->
 <nav class="mobile-nav">
-
-    <a href="#lich-hoc" class="active">
-        <span class="mobile-icon">🏠</span>
-        Tổng quan
-    </a>
-
-    <a href="#hang-ngay">
-        <span class="mobile-icon">📅</span>
-        Hàng ngày
-    </a>
-
-    <a href="#hang-tuan">
-        <span class="mobile-icon">🗓️</span>
-        Hàng tuần
-    </a>
-
-    <a href="#luu-y">
-        <span class="mobile-icon">📌</span>
-        Lưu ý
-    </a>
-
+  <a href="#top" class="active"><span class="nav-icon">🏠</span>Tổng quan</a>
+  <a href="#hang-ngay"><span class="nav-icon">📅</span>Hàng ngày</a>
+  <a href="#hang-tuan"><span class="nav-icon">⭐</span>Hàng tuần</a>
+  <a href="#truong"><span class="nav-icon">🏫</span>Ở trường</a>
 </nav>
 
 </body>
