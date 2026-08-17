@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="vi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f6f7f3"><title>Daily Dashboard 2.0 — Nguyễn Tuấn Anh</title>
+<style>
+:root{--bg:#f6f7f3;--card:#fff;--text:#18201b;--muted:#6d756f;--line:#e2e6df;--accent:#4d7c5b;--soft:#edf5ee;--gold:#d9a441}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.45}
+button{font:inherit}.wrap{max-width:760px;margin:auto;padding:18px 14px 100px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+h1{font-size:24px;margin:0 0 2px}.date,.hint{color:var(--muted);font-size:13px}.icon{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #00000006}
+.hero{background:linear-gradient(135deg,#edf5ee,#fff)}h2{font-size:17px;margin:0 0 10px}.score{display:flex;align-items:center;justify-content:space-between}.big{font-size:34px;font-weight:750}.stars{font-size:23px;letter-spacing:2px}
+.progress{height:9px;background:#e8ece7;border-radius:10px;overflow:hidden;margin-top:10px}.bar{height:100%;background:var(--accent);width:0;transition:.25s}
+.task{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}.task:first-of-type{border-top:0}.task input{width:22px;height:22px;accent-color:var(--accent);flex:none}.task label{flex:1}.task small{display:block;color:var(--muted);font-size:12px}
+.choice{display:flex;gap:7px;flex-wrap:wrap}.choice button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px}.choice button.active{background:var(--soft);border-color:#b9d3bd;color:#285934;font-weight:650}
+.note{width:100%;min-height:60px;border:1px solid var(--line);border-radius:12px;padding:10px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:#fafbf9;border:1px solid var(--line);border-radius:14px;padding:12px}.stat b{display:block;font-size:20px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.dow,.day{text-align:center;font-size:12px}.dow{color:var(--muted);padding:4px}.day{min-height:40px;padding:8px 2px;border-radius:10px;background:#fafbf9;cursor:pointer}.day.done{background:#e7f2e9}.day.today{outline:2px solid var(--accent)}.day.selected{background:#dcecdf;font-weight:700}
+.reward{display:flex;justify-content:space-between;padding:12px;border:1px solid var(--line);border-radius:12px;margin-top:8px}.primary{width:100%;border:0;background:var(--accent);color:#fff;border-radius:13px;padding:12px;font-weight:700}
+.view{display:none}.view.active{display:block}footer{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;border-top:1px solid var(--line);backdrop-filter:blur(12px);padding:9px 12px;z-index:10}.nav{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.nav button{border:0;background:transparent;padding:6px;border-radius:10px;color:var(--muted);font-size:12px}.nav button.active{background:var(--soft);color:#285934;font-weight:700}
+@media(min-width:700px){.wrap{padding-top:28px}.grid{grid-template-columns:repeat(4,1fr)}h1{font-size:28px}}
+</style></head><body>
+<div class="wrap"><header><div><h1>🌱 Daily Dashboard</h1><div class="date" id="todayLabel"></div></div><button class="icon" id="resetDay">↻</button></header>
+
+<section id="home" class="view active">
+<div class="card hero"><div class="score"><div><div class="hint">HÔM NAY</div><div class="big" id="scoreText">0/5 ⭐</div></div><div class="stars" id="stars">☆☆☆☆☆</div></div><div class="progress"><div class="bar" id="bar"></div></div><div class="hint" id="encourage">Bắt đầu bằng một việc nhỏ nhé!</div></div>
+
+<div class="card"><h2>🌅 Bản thân</h2>
+<div class="task"><input type="checkbox" data-task="wake"><label>Tự thức dậy<small>Không cần bố mẹ gọi</small></label></div>
+<div class="task"><input type="checkbox" data-task="bed"><label>Gấp chăn / sắp xếp giường</label></div>
+<div class="task"><input type="checkbox" data-task="hygiene"><label>Vệ sinh cá nhân<small>Đánh răng, rửa mặt, tắm/thay đồ</small></label></div></div>
+
+<div class="card"><h2>📚 Tri thức</h2>
+<div class="task"><input type="checkbox" data-task="study"><label>Học tập chủ động 60 phút<small>25 + 5 + 25 phút hoặc theo cách con chọn</small></label></div>
+<div class="task"><input type="checkbox" data-task="read"><label>Đọc sách 20 phút</label></div>
+<textarea class="note" data-field="reading" placeholder="💡 Hôm nay con nhớ điều gì?"></textarea></div>
+
+<div class="card"><h2>🏃 Thể chất</h2><div class="hint">Chọn ít nhất 1 buổi. Không cần học cả 3.</div>
+<div class="choice" id="sportChoice"><button data-value="05:30">05:30–06:00</button><button data-value="06:00">06:00–06:30</button><button data-value="21:15">21:15–21:45</button></div></div>
+
+<div class="card"><h2>🏠 Trách nhiệm</h2>
+<div class="task"><input type="checkbox" data-task="desk"><label>Dọn bàn học</label></div>
+<div class="task"><input type="checkbox" data-task="chore"><label>Việc nhà hôm nay<small>1 việc phù hợp với ngày</small></label></div>
+<div class="task"><input type="checkbox" data-task="belongings"><label>Tự sắp xếp đồ dùng</label></div></div>
+
+<div class="card"><h2>📱 Kỷ luật</h2><div class="task"><input type="checkbox" data-task="screen"><label>Hoàn thành việc quan trọng trước giải trí</label></div></div>
+<div class="card"><h2>🌙 Cuối ngày</h2>
+<div class="task"><input type="checkbox" data-task="tomorrow"><label>Chuẩn bị đồ cho ngày mai</label></div>
+<div class="task"><input type="checkbox" data-task="reflection"><label>Tự đánh giá hôm nay</label></div>
+<div class="choice" id="mood"><button data-value="😀">😀 Tốt</button><button data-value="🙂">🙂 Bình thường</button><button data-value="😐">😐 Chưa ổn</button><button data-value="😟">😟 Buồn/lo</button><button data-value="😡">😡 Bực</button></div></div>
+<div class="card"><h2>🎯 Cam kết của con</h2><div class="hint">Chọn 1 việc con muốn làm tốt nhất hôm nay.</div><input class="note" data-field="commitment" placeholder="Hôm nay con sẽ..."></div>
+<div class="card"><h2>⭐ Bonus tự giác</h2><div class="task"><input type="checkbox" data-task="bonus"><label>Con tự làm thêm một việc tốt<small>Không có trong danh sách và không cần nhắc</small></label></div></div>
+<button class="primary" id="saveBtn">💾 LƯU NGÀY HÔM NAY</button>
+</section>
+
+<section id="week" class="view"><div class="card"><h2>🧠 Nhiệm vụ hàng tuần</h2>
+<div class="task"><input type="checkbox" data-week="mentor"><label>🧠 Thứ 2 hàng tuần — Mentor 1:1<small>20:30–21:00 • Ưu tiên quan trọng nhất</small></label></div>
+<div class="task"><input type="checkbox" data-week="life"><label>🌱 Chủ nhật hàng tuần — Phát triển năng lực & Kỹ năng sống<small>15:15–16:15 • 60 phút</small></label></div></div>
+<div class="card"><h2>🏃 CLB Thể chất</h2><div class="hint">Hàng ngày — chọn 1 trong 3 khung giờ.</div><p>05:30–06:00 • 06:00–06:30 • 21:15–21:45</p></div></section>
+
+<section id="month" class="view"><div class="card"><h2 id="monthTitle">Lịch tháng</h2><div class="calendar" id="calendar"></div></div></section>
+
+<section id="stats" class="view"><div class="card"><h2>📊 Tiến bộ</h2><div class="grid">
+<div class="stat"><b id="monthStars">0</b>⭐ tháng này</div><div class="stat"><b id="streak">0</b>🔥 ngày liên tiếp</div><div class="stat"><b id="sportDays">0</b>🏃 ngày vận động</div><div class="stat"><b id="selfDays">0</b>🧠 ngày tự giác</div>
+</div></div>
+<div class="card"><h2>🏆 Thưởng theo tuần</h2><div class="reward"><span>🥉 15 sao — Đang tiến bộ</span><b>15⭐</b></div><div class="reward"><span>🥈 20 sao — Tuần tốt</span><b>20⭐</b></div><div class="reward"><span>🥇 25 sao — Tuần rất tốt</span><b>25⭐</b></div><div class="reward"><span>🌟 30 sao — Xuất sắc</span><b>30⭐</b></div></div>
+<div class="card"><h2>💬 Nhớ nhé</h2><p>Không cần hoàn hảo. Mỗi ngày tốt hơn một chút. <b>Tự giác quan trọng hơn hoàn thành.</b></p></div></section>
+</div>
+
+<footer><div class="nav"><button class="active" data-view="home">🏠<br>Hôm nay</button><button data-view="week">📅<br>Tuần</button><button data-view="month">🗓️<br>Tháng</button><button data-view="stats">📊<br>Tiến bộ</button></div></footer>
+
+<script>
+const KEY="tuananh_daily_v2";
+const tasks=[...document.querySelectorAll("[data-task]")].map(e=>e.dataset.task);
+let state=JSON.parse(localStorage.getItem(KEY)||"{}"),selectedDate=new Date().toISOString().slice(0,10);
+function day(d){if(!state[d])state[d]={tasks:{},fields:{},sport:"",mood:"",week:{}};return state[d]}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function score(d){let x=day(d),done=tasks.filter(k=>x.tasks[k]).length,s=Math.round(done/tasks.length*5);if(x.sport)s=Math.min(5,s+1);if(x.tasks.bonus)s=Math.min(5,s+1);return{s,done}}
+function load(d){selectedDate=d;let x=day(d);document.querySelectorAll("[data-task]").forEach(e=>e.checked=!!x.tasks[e.dataset.task]);document.querySelectorAll("[data-field]").forEach(e=>e.value=x.fields[e.dataset.field]||"");document.querySelectorAll("#sportChoice button,#mood button").forEach(b=>b.classList.toggle("active",b.dataset.value===(b.closest("#sportChoice")?x.sport:x.mood)));document.querySelectorAll("[data-week]").forEach(e=>e.checked=!!x.week[e.dataset.week]);update()}
+function update(){let x=day(selectedDate),s=score(selectedDate),pct=Math.round(s.done/tasks.length*100);document.getElementById("scoreText").textContent=`${s.s}/5 ⭐`;document.getElementById("stars").textContent="★★★★★".slice(0,s.s)+"☆☆☆☆☆".slice(0,5-s.s);document.getElementById("bar").style.width=pct+"%";document.getElementById("todayLabel").textContent=new Date(selectedDate+"T12:00:00").toLocaleDateString("vi-VN",{weekday:"long",day:"2-digit",month:"2-digit",year:"numeric"});document.getElementById("encourage").textContent=s.s>=5?"Tuyệt vời! Hôm nay con đã rất chủ động.":s.s>=3?"Rất tốt! Cố thêm một chút nữa nhé.":"Bắt đầu bằng một việc nhỏ nhé!"}
+document.querySelectorAll("[data-task]").forEach(e=>e.onchange=()=>{day(selectedDate).tasks[e.dataset.task]=e.checked;save();update();renderCalendar();renderStats()});
+document.querySelectorAll("[data-field]").forEach(e=>e.oninput=()=>{day(selectedDate).fields[e.dataset.field]=e.value;save()});
+document.querySelectorAll("#sportChoice button").forEach(b=>b.onclick=()=>{day(selectedDate).sport=b.dataset.value;save();load(selectedDate);renderStats()});
+document.querySelectorAll("#mood button").forEach(b=>b.onclick=()=>{day(selectedDate).mood=b.dataset.value;save();load(selectedDate)});
+document.querySelectorAll("[data-week]").forEach(e=>e.onchange=()=>{day(selectedDate).week[e.dataset.week]=e.checked;save()});
+document.getElementById("saveBtn").onclick=()=>{save();alert("Đã lưu! Dữ liệu ngày này được giữ lại.");};
+document.getElementById("resetDay").onclick=()=>{if(confirm("Xóa dữ liệu của ngày này?")){delete state[selectedDate];save();load(selectedDate);renderCalendar();renderStats()}};
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));document.getElementById(b.dataset.view).classList.add("active");if(b.dataset.view==="month")renderCalendar();if(b.dataset.view==="stats")renderStats()});
+function renderCalendar(){let el=document.getElementById("calendar"),d=new Date(selectedDate+"T12:00:00"),y=d.getFullYear(),m=d.getMonth();document.getElementById("monthTitle").textContent=d.toLocaleDateString("vi-VN",{month:"long",year:"numeric"});el.innerHTML=["T2","T3","T4","T5","T6","T7","CN"].map(x=>`<div class="dow">${x}</div>`).join("");let first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();for(let i=0;i<first;i++)el.innerHTML+="<div></div>";for(let n=1;n<=days;n++){let ds=`${y}-${String(m+1).padStart(2,"0")}-${String(n).padStart(2,"0")}`,s=score(ds);el.innerHTML+=`<div class="day ${s.s>=3?"done":""} ${ds===new Date().toISOString().slice(0,10)?"today":""} ${ds===selectedDate?"selected":""}" data-d="${ds}">${n}<br><span>${s.s?"⭐".repeat(s.s):""}</span></div>`}el.querySelectorAll("[data-d]").forEach(e=>e.onclick=()=>{load(e.dataset.d);document.querySelector('[data-view="home"]').click()})}
+function renderStats(){let y=selectedDate.slice(0,4),m=selectedDate.slice(5,7),monthStars=0,sport=0,self=0,st=0;for(let i=1;i<=31;i++){let d=`${y}-${m}-${String(i).padStart(2,"0")}`,x=state[d];if(!x)continue;monthStars+=score(d).s;if(x.sport)sport++;if(x.tasks?.bonus)self++}for(let i=0;i<=365;i++){let d=new Date(selectedDate+"T12:00:00");d.setDate(d.getDate()-i);let ds=d.toISOString().slice(0,10);if(state[ds]&&score(ds).s>=3)st++;else break}document.getElementById("monthStars").textContent=monthStars;document.getElementById("sportDays").textContent=sport;document.getElementById("selfDays").textContent=self;document.getElementById("streak").textContent=st}
+load(selectedDate);renderCalendar();renderStats();
+</script></body></html>
