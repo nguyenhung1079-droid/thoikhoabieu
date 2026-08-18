@@ -1,522 +1,91 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f4a300">
-<title>Lịch học cá nhân - Nguyễn Tuấn Anh</title>
-
+<!doctype html>
+<html lang="vi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f6f7f3"><title>Daily Dashboard 2.0 — Nguyễn Tuấn Anh</title>
 <style>
-:root{
-  --orange:#f4a300;
-  --orange2:#df8f00;
-  --soft:#fff7e5;
-  --green:#8bd34f;
-  --green-soft:#f1fae8;
-  --blue:#4d8fe8;
-  --blue-soft:#eef5ff;
-  --text:#202124;
-  --muted:#70757a;
-  --bg:#f6f7f9;
-  --white:#fff;
-  --border:#e6e7e9;
-  --shadow:0 8px 28px rgba(0,0,0,.06);
-}
+:root{--bg:#f6f7f3;--card:#fff;--text:#18201b;--muted:#6d756f;--line:#e2e6df;--accent:#4d7c5b;--soft:#edf5ee;--gold:#d9a441}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.45}
+button{font:inherit}.wrap{max-width:760px;margin:auto;padding:18px 14px 100px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+h1{font-size:24px;margin:0 0 2px}.date,.hint{color:var(--muted);font-size:13px}.icon{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #00000006}
+.hero{background:linear-gradient(135deg,#edf5ee,#fff)}h2{font-size:17px;margin:0 0 10px}.score{display:flex;align-items:center;justify-content:space-between}.big{font-size:34px;font-weight:750}.stars{font-size:23px;letter-spacing:2px}
+.progress{height:9px;background:#e8ece7;border-radius:10px;overflow:hidden;margin-top:10px}.bar{height:100%;background:var(--accent);width:0;transition:.25s}
+.task{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}.task:first-of-type{border-top:0}.task input{width:22px;height:22px;accent-color:var(--accent);flex:none}.task label{flex:1}.task small{display:block;color:var(--muted);font-size:12px}
+.choice{display:flex;gap:7px;flex-wrap:wrap}.choice button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px}.choice button.active{background:var(--soft);border-color:#b9d3bd;color:#285934;font-weight:650}
+.note{width:100%;min-height:60px;border:1px solid var(--line);border-radius:12px;padding:10px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:#fafbf9;border:1px solid var(--line);border-radius:14px;padding:12px}.stat b{display:block;font-size:20px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.dow,.day{text-align:center;font-size:12px}.dow{color:var(--muted);padding:4px}.day{min-height:40px;padding:8px 2px;border-radius:10px;background:#fafbf9;cursor:pointer}.day.done{background:#e7f2e9}.day.today{outline:2px solid var(--accent)}.day.selected{background:#dcecdf;font-weight:700}
+.reward{display:flex;justify-content:space-between;padding:12px;border:1px solid var(--line);border-radius:12px;margin-top:8px}.primary{width:100%;border:0;background:var(--accent);color:#fff;border-radius:13px;padding:12px;font-weight:700}
+.view{display:none}.view.active{display:block}footer{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;border-top:1px solid var(--line);backdrop-filter:blur(12px);padding:9px 12px;z-index:10}.nav{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.nav button{border:0;background:transparent;padding:6px;border-radius:10px;color:var(--muted);font-size:12px}.nav button.active{background:var(--soft);color:#285934;font-weight:700}
+@media(min-width:700px){.wrap{padding-top:28px}.grid{grid-template-columns:repeat(4,1fr)}h1{font-size:28px}}
+</style></head><body>
+<div class="wrap"><header><div><h1>🌱 Daily Dashboard</h1><div class="date" id="todayLabel"></div></div><button class="icon" id="resetDay">↻</button></header>
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-}
-a{text-decoration:none}
+<section id="home" class="view active">
+<div class="card hero"><div class="score"><div><div class="hint">HÔM NAY</div><div class="big" id="scoreText">0/5 ⭐</div></div><div class="stars" id="stars">☆☆☆☆☆</div></div><div class="progress"><div class="bar" id="bar"></div></div><div class="hint" id="encourage">Bắt đầu bằng một việc nhỏ nhé!</div></div>
 
-.page{
-  max-width:1100px;
-  margin:auto;
-  padding:20px 18px 105px;
-}
+<div class="card"><h2>🌅 Bản thân</h2>
+<div class="task"><input type="checkbox" data-task="wake"><label>Tự thức dậy<small>Không cần bố mẹ gọi</small></label></div>
+<div class="task"><input type="checkbox" data-task="bed"><label>Gấp chăn / sắp xếp giường</label></div>
+<div class="task"><input type="checkbox" data-task="hygiene"><label>Vệ sinh cá nhân<small>Đánh răng, rửa mặt, tắm/thay đồ</small></label></div></div>
 
-/* HEADER */
-.header{
-  background:linear-gradient(135deg,#fffaf0,#fff);
-  border:1px solid #f0d58d;
-  border-radius:26px;
-  padding:24px;
-  box-shadow:var(--shadow);
-  margin-bottom:25px;
-}
-.badge{
-  display:inline-block;
-  background:var(--soft);
-  color:var(--orange2);
-  border-radius:99px;
-  padding:7px 12px;
-  font-size:13px;
-  font-weight:800;
-}
-h1{
-  margin:12px 0 5px;
-  font-size:clamp(29px,5vw,42px);
-}
-.subtitle{color:var(--muted);font-size:15px}
+<div class="card"><h2>📚 Tri thức</h2>
+<div class="task"><input type="checkbox" data-task="study"><label>Học tập chủ động 60 phút<small>25 + 5 + 25 phút hoặc theo cách con chọn</small></label></div>
+<div class="task"><input type="checkbox" data-task="read"><label>Đọc sách 20 phút</label></div>
+<textarea class="note" data-field="reading" placeholder="💡 Hôm nay con nhớ điều gì?"></textarea></div>
 
-/* SECTION */
-.section{margin-bottom:30px}
-.section-head{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:14px;
-}
-.section-title{font-size:27px;margin:0}
-.section-note{color:var(--muted);font-size:14px}
+<div class="card"><h2>🏃 Thể chất</h2><div class="hint">Chọn ít nhất 1 buổi. Không cần học cả 3.</div>
+<div class="choice" id="sportChoice"><button data-value="05:30">05:30–06:00</button><button data-value="06:00">06:00–06:30</button><button data-value="21:15">21:15–21:45</button></div></div>
 
-/* IMPORTANT WEEKLY */
-.weekly-banner{
-  background:linear-gradient(135deg,#fff1c7,#fffaf0);
-  border:2px solid #f2c45f;
-  border-radius:20px;
-  padding:16px 18px;
-  margin-bottom:16px;
-}
-.weekly-banner strong{color:#c77d00}
+<div class="card"><h2>🏠 Trách nhiệm</h2>
+<div class="task"><input type="checkbox" data-task="desk"><label>Dọn bàn học</label></div>
+<div class="task"><input type="checkbox" data-task="chore"><label>Việc nhà hôm nay<small>1 việc phù hợp với ngày</small></label></div>
+<div class="task"><input type="checkbox" data-task="belongings"><label>Tự sắp xếp đồ dùng</label></div></div>
 
-/* CARDS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-.card{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:19px;
-  box-shadow:var(--shadow);
-}
-.card-head{display:flex;gap:12px;align-items:flex-start}
-.icon{
-  width:44px;height:44px;flex:0 0 44px;
-  display:grid;place-items:center;
-  border-radius:14px;
-  background:var(--soft);
-  font-size:22px;
-}
-.title{font-size:19px;font-weight:750;line-height:1.25}
-.meta{
-  margin-top:4px;
-  color:var(--orange2);
-  font-size:12px;
-  font-weight:800;
-}
-.time{
-  font-size:17px;
-  font-weight:700;
-  margin:18px 0 8px;
-}
-.detail{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.45;
-}
-.btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  min-height:42px;
-  padding:9px 14px;
-  border-radius:11px;
-  background:var(--orange);
-  color:#fff;
-  font-weight:750;
-  font-size:14px;
-  margin-top:15px;
-}
-.btn:hover{background:var(--orange2)}
-
-/* WEEKLY CARDS */
-.weekly-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-.weekly-card{
-  background:#fff;
-  border:2px solid #f1cf78;
-  border-radius:20px;
-  padding:20px;
-  box-shadow:var(--shadow);
-}
-.day-label{
-  display:inline-block;
-  background:var(--orange);
-  color:#fff;
-  border-radius:99px;
-  padding:7px 11px;
-  font-size:12px;
-  font-weight:850;
-  margin-bottom:15px;
-}
-.weekly-card.important{
-  border-color:#efb92f;
-  background:linear-gradient(180deg,#fff9e9,#fff);
-}
-.weekly-card.important .day-label{background:#df8f00}
-.weekly-time{
-  font-size:20px;
-  font-weight:800;
-  margin:16px 0 5px;
-}
-
-/* SCHOOL */
-.school-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-.school-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:16px;
-}
-.school-day{
-  color:#333;
-  font-weight:800;
-  margin-bottom:7px;
-}
-.school-time{
-  color:var(--blue);
-  font-weight:750;
-  font-size:14px;
-}
-.school-subject{
-  margin-top:8px;
-  font-size:16px;
-  font-weight:700;
-}
-.school-note{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
-}
-
-
-/* SCHOOL TIMETABLE */
-.school-table-wrap{
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  box-shadow:var(--shadow);
-}
-.school-table{
-  width:100%;
-  min-width:780px;
-  border-collapse:collapse;
-  font-size:13px;
-}
-.school-table th,
-.school-table td{
-  border:1px solid #e4e5e7;
-  padding:11px 8px;
-  text-align:center;
-  vertical-align:middle;
-}
-.school-table th{
-  background:#f4f5f6;
-  font-weight:800;
-}
-.school-table td:first-child{
-  background:#fafafa;
-  font-weight:750;
-  white-space:nowrap;
-}
-.school-table small{
-  color:#777;
-  font-size:11px;
-}
-.school-table .part td{
-  background:var(--green);
-  color:#1d5d10;
-  font-weight:900;
-  font-size:14px;
-  letter-spacing:.3px;
-}
-.school-table strong{
-  color:#202124;
-}
-
-/* NOTE */
-.note{
-  background:#fff;
-  border:1px dashed #d9dadd;
-  border-radius:17px;
-  padding:16px;
-  color:#666;
-  line-height:1.55;
-  font-size:14px;
-}
-
-/* NAV */
-.desktop-nav{
-  display:flex;
-  gap:7px;
-  margin-top:18px;
-}
-.desktop-nav a{
-  color:#777;
-  background:#fff;
-  border:1px solid var(--border);
-  padding:9px 13px;
-  border-radius:10px;
-  font-size:13px;
-  font-weight:650;
-}
-.desktop-nav a:hover{color:var(--orange2);background:var(--soft)}
-
-.mobile-nav{
-  display:none;
-}
-
-/* MOBILE */
-@media(max-width:850px){
-  .grid{grid-template-columns:1fr}
-}
-
-@media(max-width:640px){
-  body{background:#fff}
-  .page{padding:12px 13px 95px}
-  .header{padding:19px;border-radius:21px}
-  .desktop-nav{display:none}
-  .section-title{font-size:25px}
-  .section-head{display:block}
-  .section-note{margin-top:4px}
-  .weekly-grid,.school-grid{grid-template-columns:1fr}
-  .card,.weekly-card{border-radius:19px}
-  .mobile-nav{
-    display:flex;
-    position:fixed;
-    left:0;right:0;bottom:0;
-    z-index:10;
-    height:72px;
-    padding-bottom:env(safe-area-inset-bottom);
-    background:rgba(255,255,255,.97);
-    backdrop-filter:blur(12px);
-    border-top:1px solid #eee;
-    box-shadow:0 -7px 24px rgba(0,0,0,.06);
-  }
-  .mobile-nav a{
-    flex:1;text-align:center;color:#999;
-    padding-top:9px;font-size:10px;
-  }
-  .mobile-nav a.active{color:var(--orange2);font-weight:800}
-  .nav-icon{display:block;font-size:21px;line-height:24px;margin-bottom:3px}
-}
-</style>
-</head>
-
-<body>
-<main class="page">
-
-<header class="header" id="top">
-  <span class="badge">📚 LỊCH HỌC CÁ NHÂN</span>
-  <h1>Nguyễn Tuấn Anh</h1>
-  <div class="subtitle">Lịch học • Lộ trình huấn luyện • Học tập & phát triển</div>
-
-  <nav class="desktop-nav">
-    <a href="#hang-ngay">Hàng ngày</a>
-    <a href="#hang-tuan">Hàng tuần</a>
-    <a href="#truong">Ở trường</a>
-  </nav>
-</header>
-
-<!-- HÀNG NGÀY -->
-<section class="section" id="hang-ngay">
-  <div class="section-head">
-    <h2 class="section-title">📅 Hàng ngày</h2>
-    <div class="section-note">CLB Thể chất — linh hoạt sáng & tối</div>
-  </div>
-
-  <div class="grid">
-
-    <article class="card">
-      <div class="card-head">
-        <div class="icon">🏃</div>
-        <div>
-          <div class="title">CLB Thể chất</div>
-          <div class="meta">HÀNG NGÀY • 30 PHÚT/BUỔI</div>
-        </div>
-      </div>
-      <div class="time">🕠 05:30 – 06:00</div>
-      <div class="detail">Lựa chọn buổi sáng</div>
-      <a class="btn" href="https://meet.google.com/zzs-bxwi-hmp" target="_blank">Vào lớp →</a>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="icon">☀️</div>
-        <div>
-          <div class="title">CLB Thể chất</div>
-          <div class="meta">HÀNG NGÀY • 30 PHÚT/BUỔI</div>
-        </div>
-      </div>
-      <div class="time">🕕 06:00 – 06:30</div>
-      <div class="detail">Lựa chọn buổi sáng</div>
-      <a class="btn" href="https://meet.google.com/ixr-rsxe-hsx" target="_blank">Vào lớp →</a>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="icon">🌙</div>
-        <div>
-          <div class="title">CLB Thể chất</div>
-          <div class="meta">HÀNG NGÀY • 30 PHÚT/BUỔI</div>
-        </div>
-      </div>
-      <div class="time">🌙 21:15 – 21:45</div>
-      <div class="detail">Lựa chọn buổi tối</div>
-      <a class="btn" href="https://meet.google.com/zzs-bxwi-hmp" target="_blank">Vào lớp →</a>
-    </article>
-
-  </div>
-
-  <div class="note" style="margin-top:14px">
-    <strong>Linh hoạt:</strong> Có thể học buổi sáng, buổi tối hoặc cả sáng và tối tùy lịch của con.
-  </div>
+<div class="card"><h2>📱 Kỷ luật</h2><div class="task"><input type="checkbox" data-task="screen"><label>Hoàn thành việc quan trọng trước giải trí</label></div></div>
+<div class="card"><h2>🌙 Cuối ngày</h2>
+<div class="task"><input type="checkbox" data-task="tomorrow"><label>Chuẩn bị đồ cho ngày mai</label></div>
+<div class="task"><input type="checkbox" data-task="reflection"><label>Tự đánh giá hôm nay</label></div>
+<div class="choice" id="mood"><button data-value="😀">😀 Tốt</button><button data-value="🙂">🙂 Bình thường</button><button data-value="😐">😐 Chưa ổn</button><button data-value="😟">😟 Buồn/lo</button><button data-value="😡">😡 Bực</button></div></div>
+<div class="card"><h2>🎯 Cam kết của con</h2><div class="hint">Chọn 1 việc con muốn làm tốt nhất hôm nay.</div><input class="note" data-field="commitment" placeholder="Hôm nay con sẽ..."></div>
+<div class="card"><h2>⭐ Bonus tự giác</h2><div class="task"><input type="checkbox" data-task="bonus"><label>Con tự làm thêm một việc tốt<small>Không có trong danh sách và không cần nhắc</small></label></div></div>
+<button class="primary" id="saveBtn">💾 LƯU NGÀY HÔM NAY</button>
 </section>
 
-<!-- HÀNG TUẦN -->
-<section class="section" id="hang-tuan">
-  <div class="section-head">
-    <h2 class="section-title">⭐ Hàng tuần</h2>
-    <div class="section-note">Hai lịch cố định cần nhớ</div>
-  </div>
+<section id="week" class="view"><div class="card"><h2>🧠 Nhiệm vụ hàng tuần</h2>
+<div class="task"><input type="checkbox" data-week="mentor"><label>🧠 Thứ 2 hàng tuần — Mentor 1:1<small>20:30–21:00 • Ưu tiên quan trọng nhất</small></label></div>
+<div class="task"><input type="checkbox" data-week="life"><label>🌱 Chủ nhật hàng tuần — Phát triển năng lực & Kỹ năng sống<small>15:15–16:15 • 60 phút</small></label></div></div>
+<div class="card"><h2>🏃 CLB Thể chất</h2><div class="hint">Hàng ngày — chọn 1 trong 3 khung giờ.</div><p>05:30–06:00 • 06:00–06:30 • 21:15–21:45</p></div></section>
 
-  <div class="weekly-banner">
-    🧠 <strong>THỨ 2 HÀNG TUẦN</strong> — Gia sư tâm lý / Mentor 1:1 là hoạt động ưu tiên quan trọng nhất.
-    <br>
-    🌱 <strong>CHỦ NHẬT HÀNG TUẦN</strong> — Phát triển năng lực & Kỹ năng sống.
-  </div>
+<section id="month" class="view"><div class="card"><h2 id="monthTitle">Lịch tháng</h2><div class="calendar" id="calendar"></div></div></section>
 
-  <div class="weekly-grid">
+<section id="stats" class="view"><div class="card"><h2>📊 Tiến bộ</h2><div class="grid">
+<div class="stat"><b id="monthStars">0</b>⭐ tháng này</div><div class="stat"><b id="streak">0</b>🔥 ngày liên tiếp</div><div class="stat"><b id="sportDays">0</b>🏃 ngày vận động</div><div class="stat"><b id="selfDays">0</b>🧠 ngày tự giác</div>
+</div></div>
+<div class="card"><h2>🏆 Thưởng theo tuần</h2><div class="reward"><span>🥉 15 sao — Đang tiến bộ</span><b>15⭐</b></div><div class="reward"><span>🥈 20 sao — Tuần tốt</span><b>20⭐</b></div><div class="reward"><span>🥇 25 sao — Tuần rất tốt</span><b>25⭐</b></div><div class="reward"><span>🌟 30 sao — Xuất sắc</span><b>30⭐</b></div></div>
+<div class="card"><h2>💬 Nhớ nhé</h2><p>Không cần hoàn hảo. Mỗi ngày tốt hơn một chút. <b>Tự giác quan trọng hơn hoàn thành.</b></p></div></section>
+</div>
 
-    <article class="weekly-card important">
-      <div class="day-label">🧠 THỨ 2 HÀNG TUẦN</div>
+<footer><div class="nav"><button class="active" data-view="home">🏠<br>Hôm nay</button><button data-view="week">📅<br>Tuần</button><button data-view="month">🗓️<br>Tháng</button><button data-view="stats">📊<br>Tiến bộ</button></div></footer>
 
-      <div class="card-head">
-        <div class="icon">🧠</div>
-        <div>
-          <div class="title">Gia sư tâm lý / Mentor 1:1</div>
-          <div class="meta">QUAN TRỌNG NHẤT</div>
-        </div>
-      </div>
-
-      <div class="weekly-time">🌙 20:30 – 21:00</div>
-      <div class="detail">30–45 phút / buổi • 1 buổi / tuần</div>
-
-      <a class="btn" href="https://meet.google.com/thm-zoxe-bti" target="_blank">
-        Vào lớp Mentor →
-      </a>
-    </article>
-
-    <article class="weekly-card">
-      <div class="day-label">🌱 CHỦ NHẬT HÀNG TUẦN</div>
-
-      <div class="card-head">
-        <div class="icon">🌱</div>
-        <div>
-          <div class="title">Phát triển năng lực & Kỹ năng sống</div>
-          <div class="meta">1 BUỔI / TUẦN</div>
-        </div>
-      </div>
-
-      <div class="weekly-time">🕒 15:15 – 16:15</div>
-      <div class="detail">60 phút / buổi</div>
-
-      <a class="btn" href="https://meet.google.com/ebc-tmac-amq" target="_blank">
-        Vào lớp Kỹ năng sống →
-      </a>
-    </article>
-
-  </div>
-</section>
-
-<!-- Ở TRƯỜNG -->
-<section class="section" id="truong">
-  <div class="section-head">
-    <h2 class="section-title">🏫 Thời khóa biểu</h2>
-    <div class="section-note">Lớp 6A5 • Trung tâm Tràng An</div>
-  </div>
-
-  <div class="school-table-wrap">
-    <table class="school-table">
-      <thead>
-        <tr>
-          <th>Thời gian</th>
-          <th>THỨ 2</th>
-          <th>THỨ 3</th>
-          <th>THỨ 4</th>
-          <th>THỨ 5</th>
-          <th>THỨ 6</th>
-          <th>THỨ 7</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="part">
-          <td colspan="7">BUỔI SÁNG</td>
-        </tr>
-        <tr>
-          <td>CA 1<br><small>7:30–9:00</small></td>
-          <td>—</td><td>—</td><td>—</td><td>—</td><td>TIẾNG ANH</td><td>—</td>
-        </tr>
-        <tr>
-          <td>CA 2<br><small>9:15–10:45</small></td>
-          <td>—</td><td>—</td><td><strong>Toán</strong><br><small>80 KẺ VẼ</small></td><td>—</td><td>—</td><td><strong>Toán</strong><br><small>80 KẺ VẼ</small></td>
-        </tr>
-
-        <tr class="part">
-          <td colspan="7">BUỔI CHIỀU</td>
-        </tr>
-        <tr>
-          <td>CA 1<br><small>13:30–15:00</small></td>
-          <td>—</td><td>—</td><td>—</td><td>TIẾNG ANH</td><td>—</td><td>—</td>
-        </tr>
-        <tr>
-          <td>CA 2<br><small>15:15–16:45</small></td>
-          <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="note" style="margin-top:14px">
-    📌 <strong>Lịch học huấn luyện</strong> được bố trí riêng ở mục <strong>Hàng ngày</strong> và <strong>Hàng tuần</strong> phía trên.
-  </div>
-</section>
-
-<section class="section">
-  <div class="note">
-    <strong>📌 3 việc cần nhớ:</strong><br>
-    1. 🏃 CLB Thể chất: linh hoạt mỗi ngày, chọn khung giờ phù hợp.<br>
-    2. 🧠 <strong>THỨ 2 HÀNG TUẦN</strong>: ưu tiên Gia sư tâm lý / Mentor 1:1 lúc 20:30.<br>
-    3. 🌱 <strong>CHỦ NHẬT HÀNG TUẦN</strong>: Phát triển năng lực & Kỹ năng sống lúc 15:15.
-  </div>
-</section>
-
-</main>
-
-<nav class="mobile-nav">
-  <a href="#top" class="active"><span class="nav-icon">🏠</span>Tổng quan</a>
-  <a href="#hang-ngay"><span class="nav-icon">📅</span>Hàng ngày</a>
-  <a href="#hang-tuan"><span class="nav-icon">⭐</span>Hàng tuần</a>
-  <a href="#truong"><span class="nav-icon">🏫</span>Ở trường</a>
-</nav>
-
-</body>
-</html>
+<script>
+const KEY="tuananh_daily_v2";
+const tasks=[...document.querySelectorAll("[data-task]")].map(e=>e.dataset.task);
+let state=JSON.parse(localStorage.getItem(KEY)||"{}"),selectedDate=new Date().toISOString().slice(0,10);
+function day(d){if(!state[d])state[d]={tasks:{},fields:{},sport:"",mood:"",week:{}};return state[d]}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function score(d){let x=day(d),done=tasks.filter(k=>x.tasks[k]).length,s=Math.round(done/tasks.length*5);if(x.sport)s=Math.min(5,s+1);if(x.tasks.bonus)s=Math.min(5,s+1);return{s,done}}
+function load(d){selectedDate=d;let x=day(d);document.querySelectorAll("[data-task]").forEach(e=>e.checked=!!x.tasks[e.dataset.task]);document.querySelectorAll("[data-field]").forEach(e=>e.value=x.fields[e.dataset.field]||"");document.querySelectorAll("#sportChoice button,#mood button").forEach(b=>b.classList.toggle("active",b.dataset.value===(b.closest("#sportChoice")?x.sport:x.mood)));document.querySelectorAll("[data-week]").forEach(e=>e.checked=!!x.week[e.dataset.week]);update()}
+function update(){let x=day(selectedDate),s=score(selectedDate),pct=Math.round(s.done/tasks.length*100);document.getElementById("scoreText").textContent=`${s.s}/5 ⭐`;document.getElementById("stars").textContent="★★★★★".slice(0,s.s)+"☆☆☆☆☆".slice(0,5-s.s);document.getElementById("bar").style.width=pct+"%";document.getElementById("todayLabel").textContent=new Date(selectedDate+"T12:00:00").toLocaleDateString("vi-VN",{weekday:"long",day:"2-digit",month:"2-digit",year:"numeric"});document.getElementById("encourage").textContent=s.s>=5?"Tuyệt vời! Hôm nay con đã rất chủ động.":s.s>=3?"Rất tốt! Cố thêm một chút nữa nhé.":"Bắt đầu bằng một việc nhỏ nhé!"}
+document.querySelectorAll("[data-task]").forEach(e=>e.onchange=()=>{day(selectedDate).tasks[e.dataset.task]=e.checked;save();update();renderCalendar();renderStats()});
+document.querySelectorAll("[data-field]").forEach(e=>e.oninput=()=>{day(selectedDate).fields[e.dataset.field]=e.value;save()});
+document.querySelectorAll("#sportChoice button").forEach(b=>b.onclick=()=>{day(selectedDate).sport=b.dataset.value;save();load(selectedDate);renderStats()});
+document.querySelectorAll("#mood button").forEach(b=>b.onclick=()=>{day(selectedDate).mood=b.dataset.value;save();load(selectedDate)});
+document.querySelectorAll("[data-week]").forEach(e=>e.onchange=()=>{day(selectedDate).week[e.dataset.week]=e.checked;save()});
+document.getElementById("saveBtn").onclick=()=>{save();alert("Đã lưu! Dữ liệu ngày này được giữ lại.");};
+document.getElementById("resetDay").onclick=()=>{if(confirm("Xóa dữ liệu của ngày này?")){delete state[selectedDate];save();load(selectedDate);renderCalendar();renderStats()}};
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));document.getElementById(b.dataset.view).classList.add("active");if(b.dataset.view==="month")renderCalendar();if(b.dataset.view==="stats")renderStats()});
+function renderCalendar(){let el=document.getElementById("calendar"),d=new Date(selectedDate+"T12:00:00"),y=d.getFullYear(),m=d.getMonth();document.getElementById("monthTitle").textContent=d.toLocaleDateString("vi-VN",{month:"long",year:"numeric"});el.innerHTML=["T2","T3","T4","T5","T6","T7","CN"].map(x=>`<div class="dow">${x}</div>`).join("");let first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();for(let i=0;i<first;i++)el.innerHTML+="<div></div>";for(let n=1;n<=days;n++){let ds=`${y}-${String(m+1).padStart(2,"0")}-${String(n).padStart(2,"0")}`,s=score(ds);el.innerHTML+=`<div class="day ${s.s>=3?"done":""} ${ds===new Date().toISOString().slice(0,10)?"today":""} ${ds===selectedDate?"selected":""}" data-d="${ds}">${n}<br><span>${s.s?"⭐".repeat(s.s):""}</span></div>`}el.querySelectorAll("[data-d]").forEach(e=>e.onclick=()=>{load(e.dataset.d);document.querySelector('[data-view="home"]').click()})}
+function renderStats(){let y=selectedDate.slice(0,4),m=selectedDate.slice(5,7),monthStars=0,sport=0,self=0,st=0;for(let i=1;i<=31;i++){let d=`${y}-${m}-${String(i).padStart(2,"0")}`,x=state[d];if(!x)continue;monthStars+=score(d).s;if(x.sport)sport++;if(x.tasks?.bonus)self++}for(let i=0;i<=365;i++){let d=new Date(selectedDate+"T12:00:00");d.setDate(d.getDate()-i);let ds=d.toISOString().slice(0,10);if(state[ds]&&score(ds).s>=3)st++;else break}document.getElementById("monthStars").textContent=monthStars;document.getElementById("sportDays").textContent=sport;document.getElementById("selfDays").textContent=self;document.getElementById("streak").textContent=st}
+load(selectedDate);renderCalendar();renderStats();
+</script></body></html>
