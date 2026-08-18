@@ -7,6 +7,9 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.45}
 button{font:inherit}.wrap{max-width:760px;margin:auto;padding:18px 14px 100px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
 h1{font-size:24px;margin:0 0 2px}.date,.hint{color:var(--muted);font-size:13px}.icon{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px}
+.top-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.top-links a{display:inline-flex;align-items:center;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#4d7c5b;font-size:12px;font-weight:700}
+.top-links a:hover{background:var(--soft)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #00000006}
 .hero{background:linear-gradient(135deg,#edf5ee,#fff)}h2{font-size:17px;margin:0 0 10px}.score{display:flex;align-items:center;justify-content:space-between}.big{font-size:34px;font-weight:750}.stars{font-size:23px;letter-spacing:2px}
 .progress{height:9px;background:#e8ece7;border-radius:10px;overflow:hidden;margin-top:10px}.bar{height:100%;background:var(--accent);width:0;transition:.25s}
@@ -19,7 +22,14 @@ h1{font-size:24px;margin:0 0 2px}.date,.hint{color:var(--muted);font-size:13px}.
 .view{display:none}.view.active{display:block}footer{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;border-top:1px solid var(--line);backdrop-filter:blur(12px);padding:9px 12px;z-index:10}.nav{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.nav button{border:0;background:transparent;padding:6px;border-radius:10px;color:var(--muted);font-size:12px}.nav button.active{background:var(--soft);color:#285934;font-weight:700}
 @media(min-width:700px){.wrap{padding-top:28px}.grid{grid-template-columns:repeat(4,1fr)}h1{font-size:28px}}
 </style></head><body>
-<div class="wrap"><header><div><h1>🌱 Daily Nguyễn Tuấn Anh</h1><div class="date" id="todayLabel"></div></div><button class="icon" id="resetDay">↻</button></header>
+<div class="wrap"><header><div>
+<h1>🌱 Daily Nguyễn Tuấn Anh</h1>
+<div class="date" id="todayLabel"></div>
+<div class="top-links">
+<a href="index.html">📚 Lịch học Tuấn Anh</a>
+<a href="daily1.html">👦 Daily Minh Trường</a>
+</div>
+</div><button class="icon" id="resetDay">↻</button></header>
 
 <section id="home" class="view active">
 <div class="card hero"><div class="score"><div><div class="hint">HÔM NAY</div><div class="big" id="scoreText">0/5 ⭐</div></div><div class="stars" id="stars">☆☆☆☆☆</div></div><div class="progress"><div class="bar" id="bar"></div></div><div class="hint" id="encourage">Bắt đầu bằng một việc nhỏ nhé!</div></div>
