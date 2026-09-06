@@ -23,13 +23,16 @@
  #moduleEditor .actions>*{width:100%;text-align:center}
 }
 </style><style id="fgs-center-week">
-.center-week{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin-top:12px}
-.center-day{min-width:0;border:1px solid var(--ln);border-radius:12px;background:#fffaf0;padding:12px;display:flex;flex-direction:column;gap:5px}
-.center-day b{font-size:16px}
-.center-day span{font-weight:700}
-.center-day small{color:var(--mut);line-height:1.35}
-@media(max-width:850px){.center-week{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:560px){.center-week{grid-template-columns:1fr 1fr;gap:8px}.center-day{padding:10px}.center-day b{font-size:15px}.center-day small{font-size:12px}}
+.center-week{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.center-day{min-width:0;min-height:150px;border:1px solid #e5e7eb;border-radius:16px;background:linear-gradient(180deg,#fffdf8 0%,#fff8e8 100%);padding:14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 3px 10px rgba(15,23,42,.04)}
+.center-day b{font-size:16px;color:#111827;border-bottom:1px solid #eee6d5;padding-bottom:8px;margin-bottom:2px}
+.center-day .session{font-weight:800;font-size:15px;line-height:1.3}
+.center-day small{color:#64748b;line-height:1.35;font-size:13px}
+.center-day.empty{justify-content:flex-start}
+.center-day.empty .empty{color:#94a3b8;font-weight:600;padding-top:8px}
+#center h2{margin-bottom:6px}
+@media(max-width:850px){.center-week{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.center-week{grid-template-columns:1fr;gap:9px}.center-day{min-height:0;padding:12px}.center-day b{font-size:15px}.center-day .session{font-size:14px}.center-day small{font-size:12px}}
 </style></head><body>
 <header class="top"><div class="topin"><button class="btn" onclick="back()">‹</button><button class="btn" onclick="forward()">›</button><button class="btn home" onclick="go('home')">⌂</button><div class="brand"><b>FAMILY GROWTH SYSTEM — STABLE BASE</b><small id="head">Tuấn Anh & Minh Trường • 2026–2027</small></div><button class="btn" onclick="go('tasks')">✅ Nhiệm vụ</button><button class="btn" onclick="go('schedule')">🏫 TKB</button><button class="btn" onclick="go('curriculum')">📚 Curriculum</button></div></header>
 <main class="wrap">
@@ -48,7 +51,14 @@
 <div class="actions" style="margin-top:10px"><input id="moduleSearch" placeholder="Tìm Module..." oninput="renderCurriculum()" style="flex:1;padding:10px;border:1px solid var(--ln);border-radius:10px"><button class="primary" onclick="openModuleForm()">＋ Module mới</button></div>
 </div><div id="moduleList"></div>
 <div id="moduleEditor" class="card" style="display:none"></div>
-</section><section id="schedule" class="page"><div class="card"><div class="mut">FAMILY GROWTH • SCHOOL SCHEDULE</div><h2 id="stitle">🏫 Thời khóa biểu</h2><div class="mut" id="snote"></div><div class="switch" style="margin-top:10px"><button class="btn" onclick="setChild('ta')">🔵 Tuấn Anh • 7A5</button><button class="btn" onclick="setChild('mt')">🟢 Minh Trường • 1D4</button></div><div id="stable" class="table" style="margin-top:10px"></div></div><div id="center" class="card"><h2>🎓 Học thêm phụ đạo tại Trung tâm – Tuấn Anh</h2><div class="mut">Lịch học thêm được trình bày theo từng ngày trong tuần để dễ theo dõi.</div><div class="center-week"><div class="center-day"><b>Thứ 2</b><span>Toán</span><small>13:30–15:00</small></div><div class="center-day"><b>Thứ 3</b><span>—</span></div><div class="center-day"><b>Thứ 4</b><span>Toán</span><small>17:00–18:30</small></div><div class="center-day"><b>Thứ 5</b><span>📖 Ngữ văn — Ca 1</span><small>13:30–15:00</small><span>🇬🇧 Tiếng Anh — Ca 2</span><small>15:15–16:45</small><span>🥋 Võ thuật — Ca 3</span><small>17:30–19:00 hoặc 19:15</small></div><div class="center-day"><b>Thứ 6</b><span>Ngữ văn</span><small>13:30–15:00</small></div><div class="center-day"><b>Thứ 7</b><span>—</span></div></div></div></section>
+</section><section id="schedule" class="page"><div class="card"><div class="mut">FAMILY GROWTH • SCHOOL SCHEDULE</div><h2 id="stitle">🏫 Thời khóa biểu</h2><div class="mut" id="snote"></div><div class="switch" style="margin-top:10px"><button class="btn" onclick="setChild('ta')">🔵 Tuấn Anh • 7A5</button><button class="btn" onclick="setChild('mt')">🟢 Minh Trường • 1D4</button></div><div id="stable" class="table" style="margin-top:10px"></div></div><div id="center" class="card"><h2>🎓 Học thêm phụ đạo tại Trung tâm – Tuấn Anh</h2><div class="mut">Lịch học thêm được trình bày theo từng ngày trong tuần để dễ theo dõi.</div><div class="center-week">
+<div class="center-day"><b>Thứ 2</b><span class="session">📘 Toán</span><small>Ca học: 13:30–15:00</small></div>
+<div class="center-day empty"><b>Thứ 3</b><span class="empty">Không có lớp</span></div>
+<div class="center-day"><b>Thứ 4</b><span class="session">📘 Toán</span><small>Ca học: 17:00–18:30</small></div>
+<div class="center-day"><b>Thứ 5</b><span class="session">📖 Ngữ văn — Ca 1</span><small>13:30–15:00</small><span class="session">🇬🇧 Tiếng Anh — Ca 2</span><small>15:15–16:45</small><span class="session">🥋 Võ thuật — Ca 3</span><small>17:30–19:00 hoặc 19:15</small></div>
+<div class="center-day"><b>Thứ 6</b><span class="session">📖 Ngữ văn</span><small>Ca học: 13:30–15:00</small></div>
+<div class="center-day empty"><b>Thứ 7</b><span class="empty">Không có lớp</span></div>
+</div></div></section>
 </main><nav class="bottom" aria-label="Điều hướng chính"><div class="bottomin"><button onclick="go('home')">🏠<br>Home</button><button onclick="go('tasks')">🎯<br>Today</button><button onclick="go('schedule')">🏫<br>TKB</button><button onclick="go('curriculum')">📚<br>Module</button><button onclick="go('progress')">📈<br>Growth</button><button onclick="go('parent')">👨‍👩‍👦<br>Parent</button></div></nav>
 <script>
 const KEY='FAMILY_DASH_42';let S=JSON.parse(localStorage.getItem(KEY)||'null')||{child:'ta',days:{ta:{},mt:{}},spent:{ta:0,mt:0},notes:{ta:{},mt:{}},modules:[]};S.modules??=[];let timerId=null,sec=1500;const TA={1:['CHAOCO','TABT','HĐTN','TOÁN','TOÁN'],2:['GDĐP','TIN','VĂN','VĂN','HÓA'],3:['NHẠC','SỬ','TD','SỬ','VĂN'],4:['ANH','CN','ĐỊA','TD','SINH'],5:['GDCD','ANH','VĂN','ANH','LÝ'],6:['TOÁN','MT','SINH','TOÁN','SH']};const MT={1:['HĐTN','Tiếng Việt','Tiếng Việt','Toán','Đạo đức','HD Tự học','Âm nhạc'],2:['Tiếng Việt','Tiếng Việt','Âm nhạc','Tiếng Việt','HD Tự học','Thư viện'],3:['Tiếng Việt','Tiếng Việt','Toán','HĐTN','Tự nhiên xã hội','HD Tự học'],4:['Tiếng Việt','Tiếng Việt','Tiếng Việt','Thể dục','Tự nhiên xã hội','HD Tự học'],5:['Tiếng Việt','Thể dục','Tiếng Việt','Toán','HĐTN','HD Tự học','Mĩ thuật']};const rewards=[['🎬 Chọn phim gia đình',50],['🍕 Chọn món cuối tuần',80],['🎮 +30 phút hoạt động yêu thích',120],['🌳 Chọn hoạt động gia đình',160],['🎁 Phần thưởng đặc biệt',250]];function save(){localStorage.setItem(KEY,JSON.stringify(S))}function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function iso(d){return new Date(d-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}let de=document.getElementById('date');de.value=iso(new Date());de.onchange=render;function db(){let c=S.child,k=de.value;S.days[c]??={};S.days[c][k]??={tasks:[]};return S.days[c][k]}function setChild(c){S.child=c;save();render()}let navStack=[],navPos=-1;
