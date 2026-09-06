@@ -1,15 +1,19 @@
-# Thời khóa biểu — Daily Dashboard 3.1
+# Tuấn Anh Daily Dashboard 3.2
 
-## Cấu trúc
-- `index.html`: trang điều khiển trung tâm.
-- `daily2.html`: Dashboard Nguyễn Tuấn Anh — lớp 7A5.
-- `daily1.html`: Dashboard Nguyễn Minh Trường — lớp 1.
-- `manifest.json`: cấu hình PWA.
-- `sw.js`: Service Worker cho offline/cache.
-- `icons/`: biểu tượng ứng dụng.
+## Điểm mới
+- Nút `‹` Back, `›` Forward và `⌂` Home.
+- Điều hướng giữa tất cả các trang bằng hash/history, dùng được nút Back/Forward của trình duyệt.
+- Mobile có thanh điều hướng dưới màn hình.
+- Timeline theo thời gian nhà trường năm học 2026–2027.
+- Tự nhận diện hoạt động đang diễn ra khi mở đúng ngày hiện tại.
+- TKB 7A5 + lịch Trung tâm.
+- Checklist, điểm, streak, phần thưởng, lịch tháng, Focus 25 phút.
+- Export/Import JSON.
+- PWA + Service Worker.
 
-## Đưa lên GitHub Pages
-Upload/commit toàn bộ thư mục vào repository `nguyenhung1079-droid/thoikhoabieu`, giữ đúng cấu trúc thư mục. GitHub Pages sẽ dùng `index.html` làm trang chính.
+## Cài GitHub Pages
+Đưa `index.html`, `manifest.json`, `sw.js` và thư mục `icons` vào thư mục gốc repository.
+Trong Settings → Pages chọn Deploy from a branch → main → /(root).
 
-## Dữ liệu
-Dashboard dùng LocalStorage theo từng trình duyệt/thiết bị. Dashboard Tuấn Anh có Xuất/Nhập JSON để sao lưu.
+## Lưu ý
+Dữ liệu ứng dụng hiện lưu bằng LocalStorage trên từng thiết bị. Chưa đồng bộ giữa các thiết bị.

@@ -1,28 +1,171 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f4a300"><link rel="manifest" href="manifest.json">
-<title>Daily Dashboard 3.1</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4a300">
+<link rel="manifest" href="manifest.json">
+<title>Tuấn Anh • Daily Dashboard 3.2</title>
 <style>
-:root{--bg:#f5f6f8;--card:#fff;--text:#202124;--muted:#6b7280;--line:#e4e7eb;--a:#f4a300}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Arial}.wrap{max-width:1050px;margin:auto;padding:18px 14px 80px}
-header,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 6px 22px #0000000a;margin-bottom:14px}
-h1{margin:4px 0;font-size:32px}.muted{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.links{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}.link{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}.link b{display:block;font-size:18px;margin-bottom:5px}
-button{border:0;background:var(--a);color:#fff;padding:10px 13px;border-radius:10px;font-weight:800;cursor:pointer}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-@media(max-width:650px){.grid,.links{grid-template-columns:1fr}h1{font-size:27px}}
+:root{--bg:#f4f6f8;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;--accent:#f4a300;--accent2:#fff3c7;--green:#48a868;--blue:#3b82f6;--red:#e05252;--shadow:0 7px 24px #0000000b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.app{max-width:1180px;margin:auto;padding:12px 14px 95px}.top{position:sticky;top:0;z-index:20;background:#ffffffec;backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin:0 -14px 14px;padding:10px 14px}
+.topbar{max-width:1150px;margin:auto;display:flex;align-items:center;gap:8px}.brand{flex:1;min-width:0}.brand b{display:block;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand span{font-size:11px;color:var(--muted)}
+.iconbtn,.navbtn{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:11px;padding:9px 12px;font-weight:800;cursor:pointer}.iconbtn:disabled{opacity:.4;cursor:not-allowed}.homebtn{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hero,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:17px;margin-bottom:13px}.hero{background:linear-gradient(135deg,#fff0bd,#fff)}h1{font-size:31px;line-height:1.1;margin:4px 0 5px}.muted{color:var(--muted);font-size:12px}
+.pages{display:none}.pages.active{display:block}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:13px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{border:1px solid #ecdca7;background:#fffdf5;border-radius:12px;padding:10px}.stat b{display:block;font-size:23px}.progress{height:9px;background:#eee;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--accent);width:0}
+.quicknav{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:13px}.quicknav button{border:1px solid var(--line);background:#fff;border-radius:13px;padding:11px 5px;font-weight:800;cursor:pointer}.quicknav button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.task{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:11px;padding:10px;margin:7px 0}.task.done{background:#f1faf3;color:#737373;text-decoration:line-through}.task input{accent-color:var(--accent)}.points{margin-left:auto;font-weight:900;color:#a36c00}.delete{background:#fdeaea;color:#a33;border:0;border-radius:8px;padding:5px 8px;cursor:pointer}
+form{display:grid;grid-template-columns:1fr 75px auto;gap:7px}input,textarea,select{border:1px solid var(--line);border-radius:10px;padding:9px;font:inherit;background:#fff}button.primary{background:var(--accent);border:0;color:#fff;border-radius:10px;padding:10px 13px;font-weight:900;cursor:pointer}
+.timeline{position:relative}.timeitem{display:grid;grid-template-columns:95px 20px 1fr;gap:8px;min-height:63px}.time{font-size:11px;font-weight:900;text-align:right;color:#9a6800;padding-top:2px}.dot{position:relative}.dot:before{content:"";position:absolute;top:5px;left:6px;width:9px;height:9px;border-radius:50%;background:var(--accent);z-index:2}.dot:after{content:"";position:absolute;top:14px;bottom:-7px;left:10px;border-left:2px solid #eadcae}.timeitem:last-child .dot:after{display:none}.timecard{border:1px solid var(--line);border-radius:11px;padding:9px;margin-bottom:7px}.timecard.current{border:2px solid var(--accent);background:#fff9e5}.badge{display:inline-block;font-size:10px;padding:3px 7px;border-radius:99px;background:#eee;margin-left:5px}.current .badge{background:var(--accent);color:#fff}
+.schedule{overflow:auto}table{width:100%;min-width:760px;border-collapse:collapse;font-size:12px}th,td{border:1px solid var(--line);padding:8px;text-align:center}th{background:#f4f4f5}
+.barrow{display:grid;grid-template-columns:45px 1fr 50px;gap:8px;align-items:center;margin:8px 0;font-size:11px}.bar{height:9px;background:#eee;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent)}
+.reward{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:11px;margin:7px 0}.reward .rtext{flex:1}.reward button{border:0;border-radius:9px;padding:8px 10px;background:var(--accent);color:#fff;font-weight:800}.reward button:disabled{opacity:.35}
+.timer{text-align:center;font-size:54px;font-weight:950;letter-spacing:1px}.center{text-align:center}.actions{display:flex;gap:7px;flex-wrap:wrap}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.calendar div{padding:8px 4px;text-align:center;border:1px solid var(--line);border-radius:8px;font-size:11px;background:#fff;cursor:pointer}.calendar .head{border:0;background:transparent;font-weight:900;color:#777;cursor:default}.calendar .done{background:#edf9ef}.calendar .today{outline:2px solid var(--accent)}
+.status{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:99px;background:#fff;font-weight:900;border:1px solid var(--line)}.status .led{width:9px;height:9px;border-radius:50%;background:var(--green)}.note{padding:10px;border:1px dashed #ccc;border-radius:10px;color:#666;background:#fafafa;font-size:12px}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:30;background:#ffffffee;backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:7px max(8px,env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-right));display:none}.bottomin{max-width:700px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.bottom button{border:0;background:transparent;padding:7px 2px;border-radius:10px;font-size:10px;font-weight:800;color:#666}.bottom button.active{background:var(--accent2);color:#8a5b00}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.quicknav{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.app{padding:8px 9px 88px}.top{margin:0 -9px 10px;padding:8px 9px}.top .navbtn{display:none}.hero,.card{padding:13px;border-radius:15px}h1{font-size:26px}.quicknav{display:none}.bottom{display:block}.timeitem{grid-template-columns:78px 18px 1fr}.time{font-size:10px}.timer{font-size:44px}}
 </style>
-</head><body><main class="wrap">
-<header><div class="muted">📚 FAMILY GROWTH • DAILY DASHBOARD 3.1</div><h1>Thời khóa biểu & Dashboard</h1>
-<div class="muted">Trung tâm điều khiển cho Minh Trường và Tuấn Anh.</div>
-<div class="links">
-<a class="link" href="daily2.html"><b>🎓 Tuấn Anh — Lớp 7A5</b><span class="muted">Checklist • điểm ⭐ • streak • phần thưởng • TKB • phụ huynh</span></a>
-<a class="link" href="daily1.html"><b>🌱 Minh Trường — Lớp 1</b><span class="muted">Checklist học tập • thể chất • kỹ năng</span></a>
-</div></header>
+</head>
+<body>
+<div class="top">
+  <div class="topbar">
+    <button class="iconbtn" id="back" title="Trang trước">‹</button>
+    <button class="iconbtn" id="forward" title="Trang sau">›</button>
+    <button class="iconbtn homebtn" onclick="go('home')">⌂</button>
+    <div class="brand"><b>Tuấn Anh • Daily Dashboard 3.2</b><span>Lớp 7A5 • Năm học 2026–2027</span></div>
+    <button class="navbtn" onclick="go('tasks')">✅ Nhiệm vụ</button>
+    <button class="navbtn" onclick="go('schedule')">🏫 TKB</button>
+  </div>
+</div>
+
+<main class="app">
+<section id="home" class="pages active">
+<div class="hero">
+ <div class="muted">📚 DAILY DASHBOARD 3.2</div><h1>Nguyễn Tuấn Anh</h1>
+ <div class="muted">GVCN: Nguyễn Thành Trung • Lớp 7A5</div>
+ <div style="margin-top:10px"><span class="status"><span class="led"></span><span id="liveStatus">Đang tải...</span></span></div>
+ <div style="margin-top:10px"><input id="date" type="date"></div>
+</div>
+<div class="quicknav">
+ <button data-go="home" class="active">🏠<br>Tổng quan</button><button data-go="tasks">✅<br>Nhiệm vụ</button><button data-go="progress">📈<br>Tiến bộ</button><button data-go="reward">🏆<br>Thưởng</button><button data-go="parent">👨‍👩‍👦<br>Phụ huynh</button><button data-go="schedule">🏫<br>TKB</button>
+</div>
 <div class="grid">
-<section class="card"><h2>⚙️ Hệ thống</h2><p class="muted">Bản 3.1 chạy tĩnh trên GitHub Pages, hỗ trợ PWA/offline. Dữ liệu Dashboard được lưu trên từng thiết bị bằng LocalStorage.</p>
-<div class="actions"><button onclick="location.href='daily2.html'">Mở Dashboard Tuấn Anh</button><button onclick="location.href='daily1.html'">Mở Dashboard Minh Trường</button></div></section>
-<section class="card"><h2>📱 Cài như ứng dụng</h2><p class="muted">Trên Chrome/Edge: mở trang → menu trình duyệt → “Install app / Cài đặt ứng dụng” nếu trình duyệt hiển thị tùy chọn.</p></section></div>
-<footer class="muted">Daily Dashboard 3.1 • Nguyễn Tuấn Anh / Nguyễn Minh Trường</footer>
-</main></body></html>
+ <div class="card"><h2 id="dayTitle">Hôm nay</h2><div id="dateText" class="muted"></div>
+  <div class="stats" style="margin-top:10px"><div class="stat"><b id="score">0</b><span class="muted">⭐ Hôm nay</span></div><div class="stat"><b id="done">0/0</b><span class="muted">✅ Hoàn thành</span></div><div class="stat"><b id="streak">0</b><span class="muted">🔥 Streak</span></div><div class="stat"><b id="weekScore">0</b><span class="muted">📈 Tuần</span></div></div>
+  <p class="muted">Tiến độ hôm nay</p><div class="progress"><i id="prog"></i></div>
+ </div>
+ <div class="card"><h3>🎯 Ưu tiên hôm nay</h3><div id="goals"></div></div>
+</div>
+<div class="card"><h2>⏱️ Timeline hôm nay</h2><div id="timeline" class="timeline"></div></div>
+</section>
+
+<section id="tasks" class="pages"><div class="card"><h2>✅ Nhiệm vụ</h2><div class="muted">Checklist theo từng ngày • tích điểm khi hoàn thành</div>
+<form onsubmit="addTask(event)" style="margin-top:10px"><input id="taskText" placeholder="Ví dụ: Ôn Toán 25 phút" required><input id="taskPts" type="number" min="1" value="10"><button class="primary">Thêm</button></form><div id="taskList"></div></div>
+<div class="card"><h2>⏱️ Focus 25 phút</h2><div class="timer" id="timer">25:00</div><div class="center actions" style="justify-content:center"><button class="primary" onclick="startTimer()">▶ Bắt đầu</button><button class="iconbtn" onclick="pauseTimer()">⏸ Dừng</button><button class="iconbtn" onclick="resetTimer()">↺ Đặt lại</button></div></div></section>
+
+<section id="progress" class="pages"><div class="card"><h2>📈 Tiến bộ</h2><div id="chart"></div></div><div class="card"><h2>🗓️ Lịch tháng</h2><div id="calendar" class="calendar"></div></div><div class="card"><h2>🎖️ Thành tích</h2><div id="badges"></div></div></section>
+
+<section id="reward" class="pages"><div class="card"><h2>🏆 Ngân hàng phần thưởng</h2><div style="font-size:34px;font-weight:950" id="bank">0 ⭐</div><div class="muted">Điểm khả dụng</div><div id="rewards" style="margin-top:10px"></div></div></section>
+
+<section id="parent" class="pages"><div class="grid"><div class="card"><h2>👨‍👩‍👦 Góc phụ huynh</h2><div style="font-size:34px;font-weight:950" id="rate">0%</div><div class="muted">Tỷ lệ hoàn thành hôm nay</div><p><b id="pStreak">0</b> 🔥 Streak</p><textarea id="note" style="width:100%;min-height:120px" placeholder="Nhận xét / việc cần nhắc Tuấn Anh..."></textarea><button class="primary" onclick="saveNote()" style="margin-top:8px">Lưu ghi chú</button></div>
+<div class="card"><h2>💾 Sao lưu dữ liệu</h2><p class="muted">Dữ liệu nằm trên thiết bị hiện tại. Hãy xuất JSON định kỳ.</p><div class="actions"><button class="primary" onclick="exportData()">⬇ Xuất JSON</button><label class="iconbtn">⬆ Nhập JSON<input type="file" accept=".json" hidden onchange="importData(event)"></label></div><div class="note" style="margin-top:10px">Muốn đồng bộ điện thoại + máy tính, bước tiếp theo là kết nối Google Sheets/Database.</div></div></div></section>
+
+<section id="schedule" class="pages"><div class="card"><h2>🏫 Thời khóa biểu 7A5</h2><div class="muted">Theo bảng TKB đã cung cấp</div><div class="schedule"><table><tr><th>Tiết</th><th>Thứ 2</th><th>Thứ 3</th><th>Thứ 4</th><th>Thứ 5</th><th>Thứ 6</th><th>Thứ 7</th></tr>
+<tr><td>1</td><td>CHAOCO</td><td>GDĐP</td><td>NHẠC</td><td>ANH</td><td>GDCD</td><td>TOÁN</td></tr><tr><td>2</td><td>TABT</td><td>TIN</td><td>SỬ</td><td>CN</td><td>ANH</td><td>MT</td></tr><tr><td>3</td><td>HĐTN</td><td>VĂN</td><td>TD</td><td>ĐỊA</td><td>VĂN</td><td>SINH</td></tr><tr><td>4</td><td>TOÁN</td><td>VĂN</td><td>SỬ</td><td>TD</td><td>ANH</td><td>TOÁN</td></tr><tr><td>5</td><td>TOÁN</td><td>HÓA</td><td>VĂN</td><td>SINH</td><td>LÝ</td><td>SH</td></tr></table></div></div>
+<div class="card"><h2>🎓 Lịch học Trung tâm</h2><div class="schedule"><table><tr><th>Ca</th><th>Thời gian</th><th>Thứ 2</th><th>Thứ 3</th><th>Thứ 4</th><th>Thứ 5</th><th>Thứ 6</th><th>Thứ 7</th></tr>
+<tr><td>CA 1</td><td>13:30–15:00</td><td>Toán<br>Số 63, ngõ 39</td><td>—</td><td>—</td><td>Ngữ văn<br>Số 63, ngõ 39</td><td>Ngữ văn<br>80 Kẻ Vẽ</td><td>—</td></tr>
+<tr><td>CA 2</td><td>15:15–16:45</td><td>—</td><td>—</td><td>—</td><td>Tiếng Anh<br>Số 63, ngõ 39</td><td>—</td><td>—</td></tr>
+<tr><td>CA 3</td><td>17:00–18:30</td><td>—</td><td>—</td><td>Toán<br>Số 63, ngõ 39</td><td>—</td><td>—</td><td>—</td></tr></table></div></div>
+<div class="card"><h2>⏱️ Timeline năm học 2026–2027</h2><div class="muted">Sáng / chiều theo thời gian nhà trường cung cấp. Mùa đông: buổi chiều dịch sớm 15 phút.</div><div class="schedule" style="margin-top:10px"><table><tr><th>Nội dung</th><th>Sáng</th><th>Chiều</th></tr>
+<tr><td>Học sinh đến trường</td><td>07:00–07:15</td><td>13:00–13:15</td></tr><tr><td>Học sinh truy bài</td><td>07:15–07:30</td><td>13:15–13:30</td></tr><tr><td>Tiết 1</td><td>07:30–08:15</td><td>13:30–14:15</td></tr><tr><td>Tiết 2</td><td>08:20–09:05</td><td>14:20–15:05</td></tr><tr><td>Ra chơi giữa giờ</td><td>09:05–09:20</td><td>15:05–15:20</td></tr><tr><td>Tiết 3</td><td>09:20–10:05</td><td>15:20–16:05</td></tr><tr><td>Tiết 4</td><td>10:10–10:55</td><td>16:10–16:55</td></tr><tr><td>Tiết 5</td><td>11:00–11:45</td><td>17:00–17:45</td></tr><tr><td>K6,7,8 ăn và ngủ trưa</td><td>11:00–13:00</td><td>—</td></tr></table></div></div></section>
+</main>
+
+<div class="bottom"><div class="bottomin"><button data-go="home" class="active">🏠<br>Home</button><button data-go="tasks">✅<br>Việc</button><button data-go="progress">📈<br>Tiến bộ</button><button data-go="reward">🏆<br>Thưởng</button><button data-go="schedule">🏫<br>TKB</button></div></div>
+
+<script>
+const KEY="tuananh-dashboard-32";
+let S=load(), timerId=null, seconds=1500;
+const school={
+1:["CHAOCO","TABT","HĐTN","TOÁN","TOÁN"],2:["GDĐP","TIN","VĂN","VĂN","HÓA"],3:["NHẠC","SỬ","TD","SỬ","VĂN"],4:["ANH","CN","ĐỊA","TD","SINH"],5:["GDCD","ANH","VĂN","ANH","LÝ"],6:["TOÁN","MT","SINH","TOÁN","SH"]
+};
+const center={
+1:[["13:30–15:00","Toán","Số 63, ngõ 39"]],3:[["17:00–18:30","Toán","Số 63, ngõ 39"]],4:[["13:30–15:00","Ngữ văn","Số 63, ngõ 39"],["15:15–16:45","Tiếng Anh","Số 63, ngõ 39"]],5:[["13:30–15:00","Ngữ văn","80 Kẻ Vẽ"]]
+};
+const rewards=[["🎬 Chọn phim gia đình",50],["🍕 Chọn món ăn cuối tuần",80],["🎮 Thêm 30 phút hoạt động yêu thích",120],["🌳 Chọn hoạt động gia đình",160],["🎁 Phần thưởng đặc biệt",250]];
+const dayNames=["Chủ nhật","Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy"];
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{days:{},spent:0,notes:{}}}catch(e){return{days:{},spent:0,notes:{}}}}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function iso(d){return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+const dateEl=document.getElementById("date");dateEl.value=iso(new Date());dateEl.addEventListener("change",render);
+function day(){let k=dateEl.value;if(!S.days[k])S.days[k]={tasks:[]};return S.days[k]}
+function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function go(id,push=true){
+ document.querySelectorAll(".pages").forEach(x=>x.classList.toggle("active",x.id===id));
+ document.querySelectorAll("[data-go]").forEach(x=>x.classList.toggle("active",x.dataset.go===id));
+ document.querySelectorAll(".quicknav button").forEach(x=>x.classList.toggle("active",x.dataset.go===id));
+ if(push){history.pushState({page:id},"","#"+id)}
+ window.scrollTo({top:0,behavior:"smooth"});render();
+}
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+document.getElementById("back").onclick=()=>history.back();
+document.getElementById("forward").onclick=()=>history.forward();
+window.addEventListener("popstate",()=>{let id=location.hash.replace("#","")||"home";go(id,false)});
+window.addEventListener("load",()=>{let id=location.hash.replace("#","")||"home";go(id,false);setInterval(render,30000)});
+function todayTasks(){return day().tasks}
+function streak(){
+ let n=0,d=new Date(dateEl.value+"T12:00:00");
+ while(true){let q=S.days[iso(d)];if(!q||!q.tasks.length||q.tasks.some(t=>!t.done))break;n++;d.setDate(d.getDate()-1)}
+ return n;
+}
+function weekData(){
+ let d=new Date(dateEl.value+"T12:00:00"),m=new Date(d);m.setDate(d.getDate()-((d.getDay()+6)%7));
+ let arr=[],score=0;for(let i=0;i<7;i++){let x=new Date(m);x.setDate(m.getDate()+i);let q=S.days[iso(x)]||{tasks:[]};let done=q.tasks.filter(t=>t.done),pts=done.reduce((a,t)=>a+Number(t.points),0);arr.push({d:x,total:q.tasks.length,done:done.length,pts});score+=pts}return[arr,score]
+}
+function timelineItems(){
+ let d=new Date(dateEl.value+"T12:00:00"),w=d.getDay(),now=new Date(), items=[];
+ if(w>=1&&w<=6){
+  const am=[["07:00","07:15","Học sinh đến trường"],["07:15","07:30","Học sinh truy bài"],["07:30","08:15","Tiết 1 • "+school[w][0]],["08:20","09:05","Tiết 2 • "+school[w][1]],["09:05","09:20","Ra chơi giữa giờ"],["09:20","10:05","Tiết 3 • "+school[w][2]],["10:10","10:55","Tiết 4 • "+school[w][3]],["11:00","11:45","Tiết 5 • "+school[w][4]],["11:45","13:00","Ăn + nghỉ trưa"]];
+  const pm=[["13:00","13:15","Học sinh đến trường"],["13:15","13:30","Học sinh truy bài"],["13:30","14:15","Tiết 1 • "+school[w][0]],["14:20","15:05","Tiết 2 • "+school[w][1]],["15:05","15:20","Ra chơi giữa giờ"],["15:20","16:05","Tiết 3 • "+school[w][2]],["16:10","16:55","Tiết 4 • "+school[w][3]],["17:00","17:45","Tiết 5 • "+school[w][4]]];
+  items=am.concat(pm);
+ } else return [];
+ const c=center[w]||[];c.forEach(x=>items.push([x[0].split("–")[0],x[0].split("–")[1],x[1]+" • Trung tâm • "+x[2]]));
+ return items;
+}
+function minNow(hm){let [h,m]=hm.split(":").map(Number);return h*60+m}
+function current(t){let n=new Date();if(iso(n)!==dateEl.value)return false;let a=minNow(t[0]),b=minNow(t[1]),v=n.getHours()*60+n.getMinutes();return v>=a&&v<b}
+function renderTimeline(){
+ let items=timelineItems();document.getElementById("timeline").innerHTML=items.length?items.map(t=>`<div class="timeitem"><div class="time">${t[0]}–${t[1]}</div><div class="dot"></div><div class="timecard ${current(t)?"current":""}"><b>${esc(t[2])}</b>${current(t)?'<span class="badge">ĐANG DIỄN RA</span>':""}</div></div>`).join(""):"<div class='muted'>Hôm nay không có lịch trường theo bảng đã cung cấp.</div>";
+ let now=new Date(),v=now.getHours()*60+now.getMinutes(),status="Ngoài giờ học";if(iso(now)===dateEl.value){let cur=items.find(t=>v>=minNow(t[0])&&v<minNow(t[1]));status=cur?cur[2]:"Ngoài giờ học"}document.getElementById("liveStatus").textContent=status;
+}
+function render(){
+ let q=day(),done=q.tasks.filter(t=>t.done),pts=done.reduce((a,t)=>a+Number(t.points),0),rate=q.tasks.length?Math.round(done.length/q.tasks.length*100):0,w=weekData();
+ let d=new Date(dateEl.value+"T12:00:00");document.getElementById("dateText").textContent=d.toLocaleDateString("vi-VN",{weekday:"long",day:"2-digit",month:"2-digit",year:"numeric"});document.getElementById("dayTitle").textContent=iso(d)===iso(new Date())?"Hôm nay của Tuấn Anh":"Kế hoạch "+d.toLocaleDateString("vi-VN",{day:"2-digit",month:"2-digit"});
+ document.getElementById("score").textContent=pts;document.getElementById("done").textContent=done.length+"/"+q.tasks.length;document.getElementById("streak").textContent=streak();document.getElementById("weekScore").textContent=w[1];document.getElementById("prog").style.width=rate+"%";
+ document.getElementById("goals").innerHTML=q.tasks.filter(t=>!t.done).slice(0,3).map(t=>`<div class="timecard"><b>🎯 ${esc(t.text)}</b><div class="muted">+${t.points} ⭐</div></div>`).join("")||"<div class='muted'>Đã hoàn thành toàn bộ nhiệm vụ.</div>";
+ document.getElementById("taskList").innerHTML=q.tasks.length?q.tasks.map((t,i)=>`<div class="task ${t.done?"done":""}"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask(${i})"><span>${esc(t.text)}</span><span class="points">+${t.points}⭐</span><button class="delete" onclick="deleteTask(${i})">×</button></div>`).join(""):"<p class='muted'>Chưa có nhiệm vụ. Hãy thêm nhiệm vụ đầu tiên.</p>";
+ renderTimeline();renderProgress(w);renderRewards();document.getElementById("rate").textContent=rate+"%";document.getElementById("pStreak").textContent=streak();document.getElementById("note").value=S.notes[dateEl.value]||"";
+}
+function addTask(e){e.preventDefault();day().tasks.push({text:document.getElementById("taskText").value.trim(),points:Number(document.getElementById("taskPts").value)||10,done:false});save();document.getElementById("taskText").value="";render()}
+function toggleTask(i){day().tasks[i].done=!day().tasks[i].done;save();render()}
+function deleteTask(i){if(confirm("Xóa nhiệm vụ này?")){day().tasks.splice(i,1);save();render()}}
+function renderProgress(w){
+ document.getElementById("chart").innerHTML=w[0].map(x=>`<div class="barrow"><span>${["T2","T3","T4","T5","T6","T7","CN"][((x.d.getDay()+6)%7)]}</span><div class="bar"><i style="width:${x.total?x.done/x.total*100:0}%"></i></div><span>${x.done}/${x.total}</span></div>`).join("");
+ let d=new Date(dateEl.value+"T12:00:00"),y=d.getFullYear(),m=d.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0),off=(first.getDay()+6)%7,s=["T2","T3","T4","T5","T6","T7","CN"].map(x=>`<div class="head">${x}</div>`).join("");for(let i=0;i<off;i++)s+="<div></div>";for(let n=1;n<=last.getDate();n++){let x=new Date(y,m,n),q=S.days[iso(x)],done=q&&q.tasks.length&&q.tasks.every(t=>t.done);s+=`<div class="${done?"done ":""}${iso(x)===iso(new Date())?"today":""}" onclick="pickDay(${n})">${n}${q&&q.tasks.length?" •":""}</div>`}document.getElementById("calendar").innerHTML=s;
+ let earned=Object.values(S.days).reduce((a,q)=>a+q.tasks.filter(t=>t.done).reduce((z,t)=>z+Number(t.points),0),0),bad=[];if(earned>=100)bad.push("🏆 100+ điểm");if(earned>=250)bad.push("⭐ 250+ điểm");if(streak()>=3)bad.push("🔥 Streak 3 ngày");if(earned>=500)bad.push("🚀 500+ điểm");document.getElementById("badges").innerHTML=bad.length?bad.map(x=>`<div class="timecard">${x}</div>`).join(""):"<div class='muted'>Hoàn thành nhiệm vụ để mở huy hiệu.</div>";
+}
+function pickDay(n){let d=new Date(dateEl.value+"T12:00:00");d.setDate(n);dateEl.value=iso(d);go("home")}
+function renderRewards(){let earned=Object.values(S.days).reduce((a,q)=>a+q.tasks.filter(t=>t.done).reduce((z,t)=>z+Number(t.points),0),0),available=earned-(S.spent||0);document.getElementById("bank").textContent=available+" ⭐";document.getElementById("rewards").innerHTML=rewards.map((r,i)=>`<div class="reward"><div class="rtext"><b>${r[0]}</b><div class="muted">${r[1]} điểm</div></div><button ${available<r[1]?"disabled":""} onclick="redeem(${i})">Đổi</button></div>`).join("")}
+function redeem(i){let earned=Object.values(S.days).reduce((a,q)=>a+q.tasks.filter(t=>t.done).reduce((z,t)=>z+Number(t.points),0),0),available=earned-(S.spent||0);if(available>=rewards[i][1]&&confirm("Đổi "+rewards[i][0]+"?")){S.spent=(S.spent||0)+rewards[i][1];save();render()}}
+function saveNote(){S.notes[dateEl.value]=document.getElementById("note").value;save();alert("Đã lưu ghi chú.")}
+function exportData(){let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,2)],{type:"application/json"}));a.download="tuan-anh-dashboard-3.2.json";a.click()}
+function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{S=JSON.parse(r.result);save();render();alert("Đã nhập dữ liệu.")}catch(_){alert("File JSON không hợp lệ.")}};r.readAsText(f)}
+function updateTimer(){document.getElementById("timer").textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
+function startTimer(){if(timerId)return;timerId=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){pauseTimer();alert("⏰ Hoàn thành 25 phút tập trung!");seconds=1500;updateTimer()}},1000)}
+function pauseTimer(){clearInterval(timerId);timerId=null}
+function resetTimer(){pauseTimer();seconds=1500;updateTimer()}
+render();
+</script>
+</body></html>
