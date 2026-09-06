@@ -1,0 +1,13 @@
+{
+  "name":"Daily Dashboard 3.1 — Family Growth",
+  "short_name":"Daily Dashboard",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#f5f6f8",
+  "theme_color":"#f4a300",
+  "lang":"vi",
+  "icons":[
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
