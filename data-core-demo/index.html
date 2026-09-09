@@ -29,13 +29,13 @@ form{display:grid;gap:8px}input,select,textarea{width:100%;padding:10px;border:1
 <section id="reward" class="page"><div class="card"><h2>🏆 Reward</h2><div class="muted">Danh sách phần thưởng và số điểm cần thiết.</div><div id="rewardList"></div></div></section>
 <section id="backup" class="page"><div class="card"><h2>💾 Backup / Restore</h2><div class="actions"><button class="primary" onclick="downloadBackup()">⬇ Xuất JSON</button><label class="primary" style="cursor:pointer">⬆ Nhập JSON<input id="importFile" type="file" hidden accept=".json" onchange="restoreBackup(event)"></label><button class="danger" onclick="clearDemo()">Xóa DATA CORE demo</button></div><p class="muted">Backup chỉ chứa DATA CORE 1.0, không chạm dữ liệu STABLE BASE.</p></div></section>
 </main>
-<script src="data-service.js"></script><script>
-const F=window.FamilyGrowthData; F.seed();
+<script src="data-service.js?v=20260909-02"></script><script>
+const F=window.FamilyGrowthData;
 const names={child_tuan_anh:"🔵 Tuấn Anh – 7A5",child_minh_truong:"🟢 Minh Trường – 1D4"};
 const $=id=>document.getElementById(id);
 const today=()=>new Date().toISOString().slice(0,10);
 function log(x){$("log").textContent+=x+"\n"}
-function setup(){["taskChild","diaryChild"].forEach(id=>{$(id).innerHTML=F.list("children").map(c=>'<option value="'+c.id+'">'+names[c.id]+'</option>').join('')});$("diaryDate").value=today();render();runChecks()}
+function setup(){try{F.seed()}catch(e){$("health").innerHTML="<div class=\"warn\">⚠ Không khởi tạo được Data Core: "+esc(e.message)+"</div>";log("INIT ERROR: "+e.message);return}["taskChild","diaryChild"].forEach(id=>{$(id).innerHTML=F.list("children").map(c=>'<option value="'+c.id+'">'+names[c.id]+'</option>').join('')});$("diaryDate").value=today();render();runChecks()}
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));$(b.dataset.p).classList.add("on");render()});
 function render(){const cs=F.list("children");$("childCount").textContent=cs.length;$("diaryCount").textContent=F.list("diary_entries").length;$("childrenList").innerHTML=cs.map(c=>'<div class="child '+(c.color==="green"?"mt":"")+'"><b>'+names[c.id]+'</b><div class="muted">ID: '+c.id+'</div></div>').join("");renderTasks();renderDiary();renderSchedule();renderModules();renderRewards()}
 function renderTasks(){const cid=$("taskChild").value||"child_tuan_anh",a=F.byChild("tasks",cid);$("taskList").innerHTML=a.map(t=>'<div class="row"><div class="rowmain"><b>'+esc(t.title)+'</b><div class="muted">+'+t.points+' ⭐ • '+t.category+'</div></div><button class="danger" onclick="delTask(\''+t.id+'\')">Xóa</button></div>').join("")||'<div class="muted">Chưa có nhiệm vụ.</div>'}
