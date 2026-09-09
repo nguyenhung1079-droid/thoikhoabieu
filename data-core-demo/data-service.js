@@ -4,8 +4,10 @@
   const NS="FGS_DATA_CORE_1_0";
   const now=()=>new Date().toISOString();
   const uid=p=>p+"_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8);
-  const read=(key,fallback=[])=>{try{const v=localStorage.getItem(NS+"_"+key);return v?JSON.parse(v):fallback}catch(e){return fallback}};
-  const write=(key,value)=>localStorage.setItem(NS+"_"+key,JSON.stringify(value));
+  const memory={};
+  const storageOK=()=>{try{const k=NS+"_test";localStorage.setItem(k,"1");localStorage.removeItem(k);return true}catch(e){return false}};
+  const read=(key,fallback=[])=>{try{const v=localStorage.getItem(NS+"_"+key);if(v)return JSON.parse(v)}catch(e){} return Object.prototype.hasOwnProperty.call(memory,key)?clone(memory[key]):clone(fallback)};
+  const write=(key,value)=>{memory[key]=clone(value);try{localStorage.setItem(NS+"_"+key,JSON.stringify(value))}catch(e){} return value};
   const clone=v=>JSON.parse(JSON.stringify(v));
   const collections=["families","users","children","academic_years","school_schedule","personal_schedule","tasks","task_logs","modules","module_lessons","module_content","module_progress","diary_entries","reward_rules","reward_transactions","growth_domains","growth_metrics","backup_records","audit_logs","app_settings","sync_queue","devices"];
   function list(entity,filterFn){const a=read(entity);return filterFn?a.filter(filterFn):a}
@@ -69,5 +71,5 @@
     ]);
     return true;
   }
-  global.FamilyGrowthData={version:"1.0",namespace:NS,collections,now,uid,list,get,create,update,remove,byChild,searchDiary,exportAll,validateBackup,importAll,seed};
+  global.FamilyGrowthData={version:"1.0",namespace:NS,collections,now,uid,list,get,create,update,remove,byChild,searchDiary,exportAll,validateBackup,importAll,seed,storageOK};
 })(window);
