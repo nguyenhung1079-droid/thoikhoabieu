@@ -166,14 +166,16 @@ document.getElementById('moduleEditor').innerHTML='<h2>'+ (id?'✏️ Chỉnh s�
 '<label>6. Thói quen 7 ngày<textarea id="fHabit">'+esc(d.habit)+'</textarea></label>'+
 '<label>7. Hướng dẫn bố mẹ<textarea id="fParent">'+esc(d.parent)+'</textarea></label>'+
 '<label>8. Dữ liệu phần mềm cần ghi nhận<textarea id="fData">'+esc(d.data)+'</textarea></label></div></div>'+
-'<div class="actions"><button class="primary" onclick="saveModuleForm(\''+m.id+'\')">💾 Lưu Module</button><button class="btn" onclick="document.getElementById(\'moduleEditor\').style.display=\'none\'">Hủy</button></div>';
+'<div class="card" style="margin-top:10px;background:#fffaf0"><h3>🎯 Nhiệm vụ gợi ý cho Module</h3><div class="mut">Hệ thống gợi ý nhiệm vụ dựa trên <b>Hành động trong ngày</b> và <b>Thói quen 7 ngày</b>. Anh có thể sửa trực tiếp trước khi lưu.</div><textarea id="fSuggestedTasks" style="min-height:120px" placeholder="Mỗi dòng là một nhiệm vụ...">'+esc((d.suggestedTasks||suggestTasksForModule(m,c)).join('\\n'))+'</textarea><div class="actions"><button class="btn" onclick="fillSuggestedTasks()">🔄 Tạo lại gợi ý</button><button class="primary" onclick="saveModuleForm(\''+m.id+'\')">💾 Lưu Module</button><button class="btn" onclick="document.getElementById(\'moduleEditor\').style.display=\'none\'">Hủy</button></div></div>';
 }
+function suggestTasksForModule(m,child){const d=m.children[child]||{},base=[d.action,d.habit].filter(Boolean).join('\\n').split(/\\n|[•;]+/).map(x=>x.trim()).filter(Boolean);const clean=base.map(x=>x.replace(/^[-–—*]+\\s*/,'')).filter(Boolean);return clean.length?clean.slice(0,7):['Thực hành nội dung Module hôm nay','Tự đánh giá sau khi hoàn thành','Ghi nhận kết quả vào hệ thống'];}
+function fillSuggestedTasks(){const m=S.modules.find(x=>x.id===document.getElementById('meTitle')?.dataset?.moduleId)||null;const ta=document.getElementById('fSuggestedTasks');if(ta)ta.value=[document.getElementById('fAction')?.value||'',document.getElementById('fHabit')?.value||''].join('\\n').split(/\\n|[•;]+/).map(x=>x.trim()).filter(Boolean).slice(0,7).join('\\n');}
 function saveModuleForm(id){
 let m=S.modules.find(x=>x.id===id);if(!m){m=defaultModule();m.id=id;S.modules.push(m)}
 m.title=document.getElementById('meTitle').value.trim()||'Module chưa đặt tên';
 m.description=document.getElementById('meDesc').value.trim();
 let d=m.children[S.child];
-d.goal=document.getElementById('fGoal').value;d.skills=document.getElementById('fSkills').value;d.story=document.getElementById('fStory').value;d.questions=document.getElementById('fQuestions').value;d.action=document.getElementById('fAction').value;d.habit=document.getElementById('fHabit').value;d.parent=document.getElementById('fParent').value;d.data=document.getElementById('fData').value;
+d.goal=document.getElementById('fGoal').value;d.skills=document.getElementById('fSkills').value;d.story=document.getElementById('fStory').value;d.questions=document.getElementById('fQuestions').value;d.action=document.getElementById('fAction').value;d.habit=document.getElementById('fHabit').value;d.parent=document.getElementById('fParent').value;d.data=document.getElementById('fData').value;d.suggestedTasks=(document.getElementById('fSuggestedTasks')?.value||'').split(/\n/).map(x=>x.trim()).filter(Boolean);
 save();document.getElementById('moduleEditor').style.display='none';render();
 }
 function deployModule(id){
