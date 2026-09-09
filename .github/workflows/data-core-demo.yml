@@ -3,21 +3,39 @@ on:
   push:
     branches: ["dev/data-core-1.0"]
   workflow_dispatch:
+
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  validate-and-package:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Checkout DEV
+        uses: actions/checkout@v4
+
+      - name: Validate DATA CORE files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f data-core/demo.html
+          test -f data-core/data-service.js
+          test -f data-core/schema.json
+          test -f data-core/README.md
+          node --check data-core/data-service.js
+          node -e "const fs=require('fs'); const s=JSON.parse(fs.readFileSync('data-core/schema.json','utf8')); if(s.schema_version!=='1.0') process.exit(1); if(!s.entities.children || !s.entities.diary_entries) process.exit(1); console.log('schema: PASS')"
+          echo "DATA CORE 1.0 structure: PASS"
+
+      - name: Package isolated demo
+        run: |
+          mkdir -p dist
+          cp -r data-core/* dist/
+          printf '%s\n' "FAMILY GROWTH DATA CORE 1.0 DEMO" > dist/BUILD.txt
+          printf '%s\n' "DEV branch only — STABLE BASE untouched." >> dist/BUILD.txt
+
+      - name: Upload demo artifact
+        uses: actions/upload-artifact@v4
         with:
-          path: ./data-core
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          name: family-growth-data-core-1.0-demo
+          path: dist/
+          if-no-files-found: error
