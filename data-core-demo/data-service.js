@@ -49,7 +49,7 @@
     if(!read("tasks").length){
       const ta=["Tự thức dậy","Gấp chăn / sắp xếp giường","Vệ sinh cá nhân","Học tập chủ động 60 phút","Đọc sách 20 phút","Dọn bàn học","Việc nhà hôm nay","Tự sắp xếp đồ dùng","Việc quan trọng trước giải trí","Chuẩn bị đồ cho ngày mai","Tự đánh giá hôm nay"];
       const mt=["Tự thức dậy","Gấp chăn / sắp xếp chỗ ngủ","Vệ sinh cá nhân","Học tập / luyện tập 20 phút","Đọc truyện / sách 15 phút","Tự cất đồ chơi","Giúp một việc nhỏ","Tự sắp xếp đồ dùng","Làm việc cần làm trước khi xem màn hình","Chuẩn bị đồ cho ngày mai","Nói một điều vui hôm nay"];
-      write("tasks",ta.map((title,i)=>({id:uid("task"),child_id:"child_tuan_anh",title,category:"daily",frequency:"daily",points:i<3?5:10,active:true,created_at:t,updated_at:t}).concat(mt.map((title,i)=>({id:uid("task"),child_id:"child_minh_truong",title,category:"daily",frequency:"daily",points:i<3?5:10,active:true,created_at:t,updated_at:t}))).flat());
+      write("tasks",ta.map((title,i)=>({id:uid("task"),child_id:"child_tuan_anh",title,category:"daily",frequency:"daily",points:i<3?5:10,active:true,created_at:t,updated_at:t})).concat(mt.map((title,i)=>({id:uid("task"),child_id:"child_minh_truong",title,category:"daily",frequency:"daily",points:i<3?5:10,active:true,created_at:t,updated_at:t}))));
     }
     if(!read("diary_entries").length) write("diary_entries",[
       {id:"diary_seed_1",child_id:"child_tuan_anh",date:"2026-09-06",entry_type:"reminder",title:"Lịch học Teen Care",content:"CLB Thể chất: chọn 05:30–06:00 / 06:00–06:30 / 21:15–21:45. Thứ 2 Mentor 1:1 20:30–21:00. Chủ nhật Kỹ năng sống 15:15–16:15.",priority:"normal",created_by:"parent",created_at:t,updated_at:t},
