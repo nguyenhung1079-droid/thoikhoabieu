@@ -1,0 +1,40 @@
+name: FAMILY GROWTH DATA CORE — QA
+on:
+  push:
+    branches: ["qa/data-core-1.0"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout QA
+        uses: actions/checkout@v4
+
+      - name: Node syntax checks
+        run: |
+          node --check data-core-demo/data-service.js
+          node data-core-demo/tests/data-core.test.js
+          node --check /tmp/family-growth-inline.js
+
+      - name: Static UI contract checks
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path("data-core-demo/index.html").read_text()
+          required=[
+            'id="childCount"','id="diaryCount"','id="taskCount"','id="moduleCount"',
+            'id="childrenList"','id="taskList"','id="diaryList"','id="moduleList"','id="rewardList"',
+            'id="tkb"','id="personal"','id="health"','id="log"',
+            'onclick="showChildForm()"','onclick="showTaskForm()"',
+            'onclick="showDiaryForm()"','onclick="showModuleForm()"','onclick="showRewardForm()"',
+            'onclick="downloadBackup()"','onchange="restoreBackup(event)"'
+          ]
+          missing=[x for x in required if x not in s]
+          if missing:
+              raise SystemExit("MISSING UI CONTRACT: "+", ".join(missing))
+          print("STATIC UI CONTRACT: PASS")
+          PY
