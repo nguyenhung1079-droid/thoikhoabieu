@@ -89,11 +89,11 @@ assert.ok(F.validateBackup(backup));
 const bad = { ...backup, tasks: {} };
 assert.equal(F.validateBackup(bad), false);
 
-const before = JSON.stringify(F.exportAll());
+const snapshot = JSON.stringify(F.exportAll(), (k,v) => k === "exported_at" ? undefined : v);
 F.create("tasks", { child_id:ta, title:"Temporary", category:"other", frequency:"daily", points:1, active:true });
-assert.notEqual(JSON.stringify(F.exportAll()), before);
+assert.notEqual(JSON.stringify(F.exportAll(), (k,v) => k === "exported_at" ? undefined : v), snapshot);
 F.importAll(backup);
-assert.equal(JSON.stringify(F.exportAll()), before);
+assert.equal(JSON.stringify(F.exportAll(), (k,v) => k === "exported_at" ? undefined : v), snapshot);
 
 // Persistence across service reload
 const persisted = context.localStorage;
