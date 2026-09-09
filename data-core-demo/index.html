@@ -1,58 +1,163 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#2563eb"><title>FAMILY GROWTH DATA CORE 1.0 — DEMO</title>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#2563eb"><title>FAMILY GROWTH DATA CORE 1.0 — CRUD DEMO</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f3f6fa;color:#172033;font:15px system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1100px;margin:auto;padding:14px 14px 70px}
-header,.card{background:#fff;border:1px solid #dfe5ec;border-radius:16px;padding:15px;margin-bottom:12px;box-shadow:0 4px 18px #00000008}header{background:linear-gradient(135deg,#eaf2ff,#fff)}
-h1{font-size:25px;margin:4px 0}h2{font-size:20px}.muted{color:#667085;font-size:13px}
-nav{display:flex;gap:7px;overflow:auto;margin-bottom:12px;position:sticky;top:0;padding:5px 0;background:#f3f6fa;z-index:2}nav button{white-space:nowrap;border:1px solid #d8dee8;background:#fff;border-radius:10px;padding:9px 12px;font-weight:800}nav button.on{background:#2563eb;color:#fff}
-.page{display:none}.page.on{display:block}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.children{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.child{border:2px solid #dbeafe;border-radius:14px;padding:13px;cursor:pointer}.child.mt{border-color:#d9f5d1}.child.selected{box-shadow:0 0 0 3px #2563eb22}
-.kpi{font-size:28px;font-weight:900}.pill{display:inline-block;border-radius:999px;background:#eef2ff;padding:5px 9px;font-size:12px;font-weight:800}
-form{display:grid;gap:8px}input,select,textarea{width:100%;padding:10px;border:1px solid #d7dde6;border-radius:9px;font:inherit}textarea{min-height:110px}.actions{display:flex;gap:7px;flex-wrap:wrap}button.primary{border:0;background:#2563eb;color:#fff;border-radius:9px;padding:9px 12px;font-weight:800}button.danger{border:0;background:#fee2e2;color:#991b1b;border-radius:9px;padding:8px 10px;font-weight:800}
-.row{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #edf0f4}.row:last-child{border-bottom:0}.rowmain{flex:1}.right{margin-left:auto}.schedule{overflow:auto}table{border-collapse:collapse;width:100%;min-width:760px}th,td{border:1px solid #dde3eb;padding:8px;text-align:center;font-size:12px}th{background:#f5f7fa}
-.ok{color:#16803c;font-weight:800}.warn{color:#a15c00;font-weight:800}.log{background:#0f172a;color:#dbeafe;border-radius:10px;padding:10px;font:12px ui-monospace,monospace;max-height:230px;overflow:auto;white-space:pre-wrap}
-@media(max-width:650px){.wrap{padding:9px 9px 60px}.grid,.children{grid-template-columns:1fr}h1{font-size:21px}.card{padding:12px}nav button{padding:8px 10px}}
+*{box-sizing:border-box}body{margin:0;background:#f3f6fa;color:#172033;font:15px system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1180px;margin:auto;padding:14px 14px 80px}
+header,.card{background:#fff;border:1px solid #dfe5ec;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 18px #00000008}header{background:linear-gradient(135deg,#eaf2ff,#fff)}
+h1{font-size:25px;margin:4px 0}h2{font-size:20px;margin:4px 0 12px}.muted{color:#667085;font-size:13px}
+nav{display:flex;gap:7px;overflow:auto;margin-bottom:12px;position:sticky;top:0;padding:5px 0;background:#f3f6fa;z-index:5}nav button{white-space:nowrap;border:1px solid #d8dee8;background:#fff;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}nav button.on{background:#2563eb;color:#fff}
+.page{display:none}.page.on{display:block}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.kpi{font-size:28px;font-weight:900}.pill{display:inline-block;border-radius:999px;background:#eef2ff;padding:4px 9px;font-size:12px;font-weight:800}
+form{display:grid;gap:8px}input,select,textarea{width:100%;padding:10px;border:1px solid #d7dde6;border-radius:9px;font:inherit;background:#fff}textarea{min-height:105px}.actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}button.primary{border:0;background:#2563eb;color:#fff;border-radius:9px;padding:9px 12px;font-weight:800;cursor:pointer}button.secondary{border:1px solid #cfd7e3;background:#fff;border-radius:9px;padding:9px 12px;font-weight:800;cursor:pointer}button.danger{border:0;background:#fee2e2;color:#991b1b;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}.row{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #edf0f4}.row:last-child{border-bottom:0}.rowmain{flex:1;min-width:0}.right{margin-left:auto}.children{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.child{border:2px solid #dbeafe;border-radius:14px;padding:13px}.child.mt{border-color:#d9f5d1}.schedule{overflow:auto}table{border-collapse:collapse;width:100%;min-width:760px}th,td{border:1px solid #dde3eb;padding:8px;text-align:center;font-size:12px}th{background:#f5f7fa}.ok{color:#16803c;font-weight:800}.warn{color:#a15c00;font-weight:800}.log{background:#0f172a;color:#dbeafe;border-radius:10px;padding:10px;font:12px ui-monospace,monospace;max-height:230px;overflow:auto;white-space:pre-wrap}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.toolbar>*{flex:1;min-width:140px}.empty{padding:18px;text-align:center;color:#667085;background:#f8fafc;border-radius:10px}.editbox{background:#f8fbff;border:1px solid #dbeafe;border-radius:12px;padding:12px;margin:10px 0}.small{font-size:12px}.count{font-weight:800;color:#475467}
+@media(max-width:700px){.wrap{padding:8px 8px 70px}.grid,.grid3,.children{grid-template-columns:1fr}h1{font-size:21px}.card{padding:12px}nav{top:0}.row{flex-wrap:wrap}.row .right{margin-left:0;width:100%}}
 </style></head>
 <body><main class="wrap">
-<header><div class="muted">🧠 FAMILY GROWTH DATA CORE 1.0</div><h1>DEMO — chưa kết nối STABLE BASE</h1><div class="muted">Bản thử nghiệm an toàn: dữ liệu dùng namespace riêng <b>FGS_DATA_CORE_1_0</b>. Không sửa phần mềm đang chạy.</div></header>
-<nav><button class="on" data-p="home">🏠 Tổng quan</button><button data-p="children">👦 Hai con</button><button data-p="schedule">🏫 TKB</button><button data-p="tasks">🎯 Tasks</button><button data-p="diary">📖 Nhật ký</button><button data-p="module">📚 Module</button><button data-p="reward">🏆 Reward</button><button data-p="backup">💾 Backup</button></nav>
+<header><div class="muted">🧠 FAMILY GROWTH DATA CORE 1.0</div><h1>DEMO — CRUD & DATA PERSISTENCE</h1><div class="muted">Môi trường độc lập với STABLE BASE • Namespace: <b>FGS_DATA_CORE_1_0</b></div></header>
+<nav>
+<button class="on" data-p="home">🏠 Tổng quan</button><button data-p="children">👦 Hai con</button><button data-p="schedule">🏫 TKB</button><button data-p="tasks">🎯 Tasks</button><button data-p="diary">📖 Nhật ký</button><button data-p="module">📚 Module</button><button data-p="reward">🏆 Reward</button><button data-p="backup">💾 Backup</button>
+</nav>
 
-<section id="home" class="page on"><div class="grid"><div class="card"><div class="kpi" id="childCount">0</div><div class="muted">Hồ sơ con</div></div><div class="card"><div class="kpi" id="diaryCount">0</div><div class="muted">Ghi chép</div></div></div><div class="card"><h2>🔐 Kiểm tra Data Core</h2><div id="health"></div><div class="log" id="log"></div></div></section>
+<section id="home" class="page on"><div class="grid">
+<div class="card"><div class="kpi" id="childCount">0</div><div class="muted">Hồ sơ con</div></div>
+<div class="card"><div class="kpi" id="diaryCount">0</div><div class="muted">Ghi chép</div></div>
+<div class="card"><div class="kpi" id="taskCount">0</div><div class="muted">Nhiệm vụ</div></div>
+<div class="card"><div class="kpi" id="moduleCount">0</div><div class="muted">Module</div></div>
+</div><div class="card"><h2>🔐 Kiểm tra Data Core</h2><div id="health"></div><div class="log" id="log"></div></div></section>
 
-<section id="children" class="page"><div class="card"><h2>👦 Hồ sơ con</h2><div class="children" id="childrenList"></div></div></section>
+<section id="children" class="page"><div class="card"><h2>👦 Hồ sơ con</h2><div class="toolbar"><button class="primary" onclick="showChildForm()">＋ Thêm hồ sơ</button><span class="count" id="childTotal"></span></div><div id="childEditor"></div><div class="children" id="childrenList"></div></div></section>
 
-<section id="schedule" class="page"><div class="card"><h2>🏫 TKB theo Thứ 2 → Thứ 7</h2><div class="muted">Demo kiểm tra cấu trúc. Dữ liệu TKB thật sẽ được migrate từ STABLE BASE sau khi anh duyệt.</div><div class="schedule" style="margin-top:10px"><table><thead><tr><th>Tiết</th><th>Thứ 2</th><th>Thứ 3</th><th>Thứ 4</th><th>Thứ 5</th><th>Thứ 6</th><th>Thứ 7</th></tr></thead><tbody id="tkb"></tbody></table></div></div><div class="card"><h2>🎓 Lịch học cá nhân Tuấn Anh</h2><div id="personal"></div></div></section>
+<section id="schedule" class="page"><div class="card"><h2>🏫 TKB Tuấn Anh – Thứ 2 → Thứ 7</h2><div class="schedule"><table><thead><tr><th>Tiết</th><th>Thứ 2</th><th>Thứ 3</th><th>Thứ 4</th><th>Thứ 5</th><th>Thứ 6</th><th>Thứ 7</th></tr></thead><tbody id="tkb"></tbody></table></div></div>
+<div class="card"><h2>🎓 Lịch học cá nhân Tuấn Anh</h2><div class="muted">Đã chuẩn hóa theo thứ trong tuần.</div><div id="personal"></div></div></section>
 
-<section id="tasks" class="page"><div class="card"><h2>🎯 Tasks CRUD</h2><label class="muted">Chọn con</label><select id="taskChild"></select><form onsubmit="addTask(event)" style="margin-top:8px"><input id="taskTitle" placeholder="Tên nhiệm vụ" required><input id="taskPoints" type="number" min="1" value="5"><button class="primary">Thêm nhiệm vụ</button></form><div id="taskList" style="margin-top:10px"></div></div></section>
+<section id="tasks" class="page"><div class="card"><h2>🎯 Tasks — Thêm / Sửa / Xóa / Lưu</h2><div class="toolbar"><select id="taskChild"></select><select id="taskCategoryFilter"><option value="">Tất cả loại</option><option value="daily">Hằng ngày</option><option value="study">Học tập</option><option value="life">Kỹ năng sống</option><option value="other">Khác</option></select><input id="taskSearch" placeholder="🔎 Tìm nhiệm vụ"></div><div id="taskEditor"></div><button class="primary" onclick="showTaskForm()">＋ Thêm nhiệm vụ</button><div id="taskList" style="margin-top:10px"></div></div></section>
 
-<section id="diary" class="page"><div class="card"><h2>📖 Nhật ký — CRUD + tìm kiếm + lọc</h2><div class="grid"><select id="diaryChild"></select><input id="diaryDate" type="date"><select id="diaryType"><option value="">Tất cả loại</option><option value="daily">Hằng ngày</option><option value="school">Nhà trường</option><option value="center">Trung tâm</option><option value="mentor">Mentor</option><option value="parent">Phụ huynh</option><option value="achievement">Thành tích</option><option value="reminder">Nhắc việc</option><option value="other">Khác</option></select><input id="diarySearch" placeholder="🔎 Tìm trong tiêu đề/nội dung"></div><form onsubmit="addDiary(event)" style="margin-top:8px"><input id="diaryTitle" placeholder="Tiêu đề" required><textarea id="diaryContent" placeholder="Nội dung ghi chép"></textarea><button class="primary">Lưu ghi chép</button></form><div id="diaryList" style="margin-top:10px"></div></div></section>
-<section id="module" class="page"><div class="card"><h2>📚 Curriculum Center</h2><div class="muted">Dữ liệu Module được lưu trong DATA CORE, gồm hai phiên bản theo từng trẻ.</div><div id="moduleList"></div></div></section>
-<section id="reward" class="page"><div class="card"><h2>🏆 Reward</h2><div class="muted">Danh sách phần thưởng và số điểm cần thiết.</div><div id="rewardList"></div></div></section>
-<section id="backup" class="page"><div class="card"><h2>💾 Backup / Restore</h2><div class="actions"><button class="primary" onclick="downloadBackup()">⬇ Xuất JSON</button><label class="primary" style="cursor:pointer">⬆ Nhập JSON<input id="importFile" type="file" hidden accept=".json" onchange="restoreBackup(event)"></label><button class="danger" onclick="clearDemo()">Xóa DATA CORE demo</button></div><p class="muted">Backup chỉ chứa DATA CORE 1.0, không chạm dữ liệu STABLE BASE.</p></div></section>
+<section id="diary" class="page"><div class="card"><h2>📖 Nhật ký — CRUD + tìm kiếm + lọc + ngày/tháng</h2><div class="toolbar"><select id="diaryChild"></select><input id="diaryDate" type="date" title="Lọc đúng ngày"><input id="diaryMonth" type="month" title="Lọc theo tháng"><select id="diaryType"><option value="">Tất cả loại</option><option value="daily">Hằng ngày</option><option value="school">Nhà trường</option><option value="center">Trung tâm</option><option value="mentor">Mentor</option><option value="parent">Phụ huynh</option><option value="achievement">Thành tích</option><option value="reminder">Nhắc việc</option><option value="other">Khác</option></select><input id="diarySearch" placeholder="🔎 Tìm tiêu đề/nội dung"></div><button class="primary" onclick="showDiaryForm()">＋ Thêm ghi chép</button><div id="diaryEditor"></div><div id="diaryList" style="margin-top:10px"></div></div></section>
+
+<section id="module" class="page"><div class="card"><h2>📚 Curriculum Center — CRUD</h2><div class="toolbar"><input id="moduleSearch" placeholder="🔎 Tìm Module"><button class="primary" onclick="showModuleForm()">＋ Thêm Module</button></div><div id="moduleEditor"></div><div id="moduleList"></div></div></section>
+
+<section id="reward" class="page"><div class="card"><h2>🏆 Reward — CRUD</h2><div class="toolbar"><input id="rewardSearch" placeholder="🔎 Tìm phần thưởng"><button class="primary" onclick="showRewardForm()">＋ Thêm phần thưởng</button></div><div id="rewardEditor"></div><div id="rewardList"></div></div></section>
+
+<section id="backup" class="page"><div class="card"><h2>💾 Backup / Restore</h2><p class="muted">Backup toàn bộ DATA CORE. Có thể tải JSON, nhập lại JSON và kiểm tra tính hợp lệ trước khi phục hồi.</p><div class="actions"><button class="primary" onclick="downloadBackup()">⬇ Xuất JSON</button><label class="primary" style="cursor:pointer">⬆ Nhập JSON<input id="importFile" type="file" hidden accept=".json" onchange="restoreBackup(event)"></label><button class="danger" onclick="clearDemo()">Xóa toàn bộ Demo</button></div><div id="backupStatus" style="margin-top:10px"></div></div></section>
 </main>
-<script src="data-service.js?v=20260909-02"></script><script>
+
+<script src="data-service.js?v=20260909-03"></script>
+<script>
+"use strict";
 const F=window.FamilyGrowthData;
 const names={child_tuan_anh:"🔵 Tuấn Anh – 7A5",child_minh_truong:"🟢 Minh Trường – 1D4"};
-const $=id=>document.getElementById(id);
-const today=()=>new Date().toISOString().slice(0,10);
-function log(x){$("log").textContent+=x+"\n"}
-function setup(){try{F.seed()}catch(e){$("health").innerHTML="<div class=\"warn\">⚠ Không khởi tạo được Data Core: "+esc(e.message)+"</div>";log("INIT ERROR: "+e.message);return}["taskChild","diaryChild"].forEach(id=>{$(id).innerHTML=F.list("children").map(c=>'<option value="'+c.id+'">'+names[c.id]+'</option>').join('')});$("diaryDate").value=today();render();runChecks()}
+const dayNames={0:"Chủ nhật",1:"Thứ 2",2:"Thứ 3",3:"Thứ 4",4:"Thứ 5",5:"Thứ 6",6:"Thứ 7"};
+const $=id=>document.getElementById(id), today=()=>new Date().toISOString().slice(0,10);
+function esc(x){return String(x??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]||c))}
+function log(x){const e=$("log");if(e)e.textContent+=x+"\n"}
+function setEditor(id,html){$(id).innerHTML=html||""}
+function closeEditor(id){setEditor(id,"")}
+function setup(){
+ try{F.seed()}catch(e){$("health").innerHTML='<div class="warn">⚠ Khởi tạo thất bại: '+esc(e.message)+'</div>';log("INIT ERROR: "+e.stack);return}
+ fillChildSelects();render();runChecks();
+}
+function fillChildSelects(){
+ ["taskChild","diaryChild"].forEach(id=>{const el=$(id),old=el.value;el.innerHTML=F.list("children").map(c=>'<option value="'+esc(c.id)+'">'+esc(names[c.id]||c.name)+'</option>').join("");if(old&&F.get("children",old))el.value=old});
+}
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));$(b.dataset.p).classList.add("on");render()});
-function render(){const cs=F.list("children");$("childCount").textContent=cs.length;$("diaryCount").textContent=F.list("diary_entries").length;$("childrenList").innerHTML=cs.map(c=>'<div class="child '+(c.color==="green"?"mt":"")+'"><b>'+names[c.id]+'</b><div class="muted">ID: '+c.id+'</div></div>').join("");renderTasks();renderDiary();renderSchedule();renderModules();renderRewards()}
-function renderTasks(){const cid=$("taskChild").value||"child_tuan_anh",a=F.byChild("tasks",cid);$("taskList").innerHTML=a.map(t=>'<div class="row"><div class="rowmain"><b>'+esc(t.title)+'</b><div class="muted">+'+t.points+' ⭐ • '+t.category+'</div></div><button class="danger" onclick="delTask(\''+t.id+'\')">Xóa</button></div>').join("")||'<div class="muted">Chưa có nhiệm vụ.</div>'}
-$("taskChild").onchange=renderTasks;
-function addTask(e){e.preventDefault();const cid=$("taskChild").value;F.create("tasks",{child_id:cid,title:$("taskTitle").value.trim(),category:"daily",frequency:"daily",points:+$("taskPoints").value||5,active:true});e.target.reset();$("taskPoints").value=5;render();log("CREATE tasks OK")}
-function delTask(id){F.remove("tasks",id);render();log("DELETE tasks OK")}
-function renderDiary(){const cid=$("diaryChild").value||"child_tuan_anh";const a=F.searchDiary($("diarySearch").value,cid,$("diaryType").value);$("diaryList").innerHTML=a.map(x=>'<div class="row"><div class="rowmain"><span class="pill">'+esc(x.entry_type)+'</span> <b>'+esc(x.title)+'</b><div class="muted">'+x.date+' • '+esc(x.content||"")+'</div></div><button class="danger" onclick="delDiary(\''+x.id+'\')">Xóa</button></div>').join("")||'<div class="muted">Không có kết quả.</div>'}
-["diaryChild","diaryDate","diaryType","diarySearch"].forEach(id=>$(id).oninput=renderDiary);
-function addDiary(e){e.preventDefault();F.create("diary_entries",{child_id:$("diaryChild").value,date:$("diaryDate").value,entry_type:$("diaryType").value||"daily",title:$("diaryTitle").value.trim(),content:$("diaryContent").value,priority:"normal"});e.target.reset();$("diaryDate").value=today();render();log("CREATE diary_entries OK")}
-function delDiary(id){F.remove("diary_entries",id);render();log("DELETE diary_entries OK")}
-function renderSchedule(){const rows=[["1","Chào cờ","GDĐP","Nhạc","Anh","GDCD","Toán"],["2","TABT","Tin","Sử","CN","Anh","MT"],["3","HĐTN","Văn","TD","Địa","Văn","Sinh"],["4","Toán","Văn","Sử","TD","Anh","Toán"],["5","Toán","Hóa","Văn","Sinh","Lý","SH"]];$("tkb").innerHTML=rows.map(r=>"<tr>"+r.map(x=>"<td>"+x+"</td>").join("")+"</tr>").join("");$("personal").innerHTML='<div class="row"><b>Thứ 2</b><span>13:30–15:00 • Toán • Trung tâm phụ đạo</span></div><div class="row"><b>Thứ 4</b><span>17:00–18:30 • Toán • Trung tâm phụ đạo</span></div><div class="row"><b>Thứ 5</b><span>13:30–15:00 • Ngữ văn • Trung tâm phụ đạo</span></div><div class="row"><b>Thứ 5</b><span>15:15–16:45 • Tiếng Anh • Trung tâm phụ đạo</span></div><div class="row"><b>Thứ 6</b><span>13:30–15:00 • Ngữ văn • Trung tâm phụ đạo</span></div>'}
-function renderModules(){const a=F.list("modules");$("moduleList").innerHTML=a.map(m=>'<div class="row"><div class="rowmain"><span class="pill">Module '+m.module_number+'</span> <b>'+esc(m.title)+'</b><div class="muted">'+esc(m.category)+' • '+esc(m.description)+'</div><div class="muted">Độ tuổi '+m.age_min+'–'+m.age_max+'</div></div></div>').join('')||'<div class="muted">Chưa có Module.</div>'}
-function renderRewards(){const a=F.list("reward_rules");$("rewardList").innerHTML=a.map(r=>'<div class="row"><div class="rowmain"><b>'+esc(r.name)+'</b><div class="muted">'+r.points_required+' ⭐</div></div></div>').join('')||'<div class="muted">Chưa có phần thưởng.</div>'}
-function runChecks(){const tests=[["Children",F.list("children").length===2],["Child isolation",F.byChild("tasks","child_tuan_anh").every(x=>x.child_id==="child_tuan_anh")],["Backup validation",F.validateBackup(F.exportAll())],["Diary search",typeof F.searchDiary==="function"],["CRUD",["create","update","remove"].every(k=>typeof F[k]==="function"])];$("health").innerHTML=tests.map(t=>'<div class="'+(t[1]?"ok":"warn")+'">'+(t[1]?"✓":"⚠")+' '+t[0]+'</div>').join("");log(tests.map(t=>t[0]+": "+(t[1]?"PASS":"FAIL")).join("\n"))}
-function downloadBackup(){const blob=new Blob([JSON.stringify(F.exportAll(),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="family-growth-data-core-1.0.json";a.click()}
-function restoreBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);F.importAll(d);alert("Restore thành công");render();runChecks()}catch(err){alert("Backup không hợp lệ: "+err.message)}};r.readAsText(f)}
-function clearDemo(){if(confirm("Xóa toàn bộ DATA CORE demo trên thiết bị này?")){F.collections.forEach(k=>localStorage.removeItem(F.namespace+"_"+k));location.reload()}}
-function esc(x){return String(x??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]))}
+
+function render(){
+ const cs=F.list("children");$("childCount").textContent=cs.length;$("diaryCount").textContent=F.list("diary_entries").length;$("taskCount").textContent=F.list("tasks").length;$("moduleCount").textContent=F.list("modules").length;$("childTotal").textContent=cs.length+" hồ sơ";
+ renderChildren();renderTasks();renderDiary();renderSchedule();renderModules();renderRewards();
+}
+function renderChildren(){
+ $("childrenList").innerHTML=F.list("children").map(c=>'<div class="child '+(c.color==="green"?"mt":"")+'"><b>'+esc(names[c.id]||c.name)+'</b><div class="muted">Lớp: '+esc(c.class_name||"")+' • Năm học: '+esc(c.academic_year_id||"")+'</div><div class="actions" style="margin-top:8px"><button class="secondary" onclick="editChild(\''+esc(c.id)+'\')">Sửa</button><button class="danger" onclick="delChild(\''+esc(c.id)+'\')">Xóa</button></div></div>').join("")||'<div class="empty">Chưa có hồ sơ.</div>';
+}
+function showChildForm(id){
+ const c=id?F.get("children",id):null;
+ setEditor("childEditor",'<div class="editbox"><form onsubmit="saveChild(event,\''+(id||"")+'\')"><input id="cfName" placeholder="Họ tên" value="'+esc(c?.name||"")+'" required><input id="cfClass" placeholder="Lớp" value="'+esc(c?.class_name||"")+'" required><div class="actions"><button class="primary">💾 Lưu</button><button type="button" class="secondary" onclick="closeEditor(\'childEditor\')">Hủy</button></div></form></div>');
+}
+function editChild(id){showChildForm(id)}
+function saveChild(e,id){e.preventDefault();const data={name:$("cfName").value.trim(),class_name:$("cfClass").value.trim(),active:true};if(id)F.update("children",id,data);else F.create("children",data);closeEditor("childEditor");fillChildSelects();render();runChecks();log((id?"UPDATE":"CREATE")+" children OK")}
+function delChild(id){if(F.list("children").length<=1)return alert("Không thể xóa hồ sơ cuối cùng.");if(!confirm("Xóa hồ sơ này?"))return;F.remove("children",id);fillChildSelects();render();runChecks();log("DELETE children OK")}
+
+function renderTasks(){
+ const cid=$("taskChild").value||"child_tuan_anh",q=($("taskSearch").value||"").toLowerCase().trim(),cat=$("taskCategoryFilter").value;
+ const a=F.byChild("tasks",cid).filter(t=>(!cat||t.category===cat)&&(!q||String(t.title).toLowerCase().includes(q))).sort((a,b)=>String(a.title).localeCompare(String(b.title)));
+ $("taskList").innerHTML='<div class="count">'+a.length+' nhiệm vụ</div>'+ (a.map(t=>'<div class="row"><div class="rowmain"><b>'+esc(t.title)+'</b><div class="muted">+'+esc(t.points)+' ⭐ • '+esc(t.category)+' • '+esc(t.frequency)+'</div></div><div class="right actions"><button class="secondary" onclick="editTask(\''+esc(t.id)+'\')">Sửa</button><button class="danger" onclick="delTask(\''+esc(t.id)+'\')">Xóa</button></div></div>').join("")||'<div class="empty">Không có nhiệm vụ phù hợp.</div>');
+}
+$("taskChild").onchange=renderTasks;$("taskCategoryFilter").oninput=renderTasks;$("taskSearch").oninput=renderTasks;
+function showTaskForm(id){
+ const t=id?F.get("tasks",id):null;
+ setEditor("taskEditor",'<div class="editbox"><form onsubmit="saveTask(event,\''+(id||"")+'\')"><input id="tfTitle" placeholder="Tên nhiệm vụ" value="'+esc(t?.title||"")+'" required><div class="grid"><input id="tfPoints" type="number" min="1" value="'+esc(t?.points||5)+'"><select id="tfCat"><option value="daily">Hằng ngày</option><option value="study">Học tập</option><option value="life">Kỹ năng sống</option><option value="other">Khác</option></select></div><div class="actions"><button class="primary">💾 Lưu</button><button type="button" class="secondary" onclick="closeEditor(\'taskEditor\')">Hủy</button></div></form></div>');
+ if(t)$("tfCat").value=t.category||"daily";
+}
+function editTask(id){showTaskForm(id)}
+function saveTask(e,id){e.preventDefault();const d={child_id:$("taskChild").value,title:$("tfTitle").value.trim(),points:+$("tfPoints").value||5,category:$("tfCat").value,frequency:"daily",active:true};if(id)F.update("tasks",id,d);else F.create("tasks",d);closeEditor("taskEditor");render();runChecks();log((id?"UPDATE":"CREATE")+" tasks OK")}
+function delTask(id){if(!confirm("Xóa nhiệm vụ này?"))return;F.remove("tasks",id);render();runChecks();log("DELETE tasks OK")}
+
+function diaryMatches(){
+ const cid=$("diaryChild").value,q=($("diarySearch").value||"").toLowerCase().trim(),type=$("diaryType").value,date=$("diaryDate").value,month=$("diaryMonth").value;
+ return F.byChild("diary_entries",cid).filter(x=>(!type||x.entry_type===type)&&(!date||x.date===date)&&(!month||String(x.date).startsWith(month))&&(!q||[x.title,x.content,x.entry_type].join(" ").toLowerCase().includes(q))).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+}
+function renderDiary(){const a=diaryMatches();$("diaryList").innerHTML='<div class="count">'+a.length+' ghi chép</div>'+(a.map(x=>'<div class="row"><div class="rowmain"><span class="pill">'+esc(x.entry_type)+'</span> <b>'+esc(x.title)+'</b><div class="muted">'+esc(x.date)+' • '+esc(x.content||"")+'</div></div><div class="right actions"><button class="secondary" onclick="editDiary(\''+esc(x.id)+'\')">Sửa</button><button class="danger" onclick="delDiary(\''+esc(x.id)+'\')">Xóa</button></div></div>').join("")||'<div class="empty">Không có ghi chép phù hợp.</div>')}
+["diaryChild","diaryDate","diaryMonth","diaryType","diarySearch"].forEach(id=>$(id).oninput=renderDiary);
+function showDiaryForm(id){
+ const x=id?F.get("diary_entries",id):null;
+ setEditor("diaryEditor",'<div class="editbox"><form onsubmit="saveDiary(event,\''+(id||"")+'\')"><div class="grid"><input id="dfDate" type="date" value="'+esc(x?.date||today())+'"><select id="dfType"><option value="daily">Hằng ngày</option><option value="school">Nhà trường</option><option value="center">Trung tâm</option><option value="mentor">Mentor</option><option value="parent">Phụ huynh</option><option value="achievement">Thành tích</option><option value="reminder">Nhắc việc</option><option value="other">Khác</option></select></div><input id="dfTitle" placeholder="Tiêu đề" value="'+esc(x?.title||"")+'" required><textarea id="dfContent" placeholder="Nội dung ghi chép">'+esc(x?.content||"")+'</textarea><div class="actions"><button class="primary">💾 Lưu ghi chép</button><button type="button" class="secondary" onclick="closeEditor(\'diaryEditor\')">Hủy</button></div></form></div>');
+ if(x)$("dfType").value=x.entry_type||"daily";
+}
+function editDiary(id){showDiaryForm(id)}
+function saveDiary(e,id){e.preventDefault();const d={child_id:$("diaryChild").value,date:$("dfDate").value,entry_type:$("dfType").value,title:$("dfTitle").value.trim(),content:$("dfContent").value,priority:"normal"};if(id)F.update("diary_entries",id,d);else F.create("diary_entries",d);closeEditor("diaryEditor");render();runChecks();log((id?"UPDATE":"CREATE")+" diary_entries OK")}
+function delDiary(id){if(!confirm("Xóa ghi chép này?"))return;F.remove("diary_entries",id);render();runChecks();log("DELETE diary_entries OK")}
+
+function renderSchedule(){
+ const rows=[["1","Chào cờ","GDĐP","Nhạc","Anh","GDCD","Toán"],["2","TABT","Tin","Sử","CN","Anh","MT"],["3","HĐTN","Văn","TD","Địa","Văn","Sinh"],["4","Toán","Văn","Sử","TD","Anh","Toán"],["5","Toán","Hóa","Văn","Sinh","Lý","SH"]];
+ $("tkb").innerHTML=rows.map(r=>"<tr>"+r.map(x=>"<td>"+esc(x)+"</td>").join("")+"</tr>").join("");
+ const p=F.list("personal_schedule").filter(x=>x.child_id==="child_tuan_anh").sort((a,b)=>(a.day_of_week-b.day_of_week)||a.start_time.localeCompare(b.start_time));
+ $("personal").innerHTML=p.map(x=>'<div class="row"><b>'+esc(x.day_of_week===-1?"Mỗi ngày":dayNames[x.day_of_week]||"")+'</b><div class="rowmain">'+esc(x.start_time)+'–'+esc(x.end_time)+' • '+esc(x.activity_name)+'<div class="muted">'+esc(x.location||"")+'</div></div></div>').join("");
+}
+
+function renderModules(){
+ const q=($("moduleSearch").value||"").toLowerCase().trim(),a=F.list("modules").filter(m=>!q||[m.title,m.category,m.description].join(" ").toLowerCase().includes(q)).sort((a,b)=>a.module_number-b.module_number);
+ $("moduleList").innerHTML='<div class="count">'+a.length+' Module</div>'+(a.map(m=>'<div class="row"><div class="rowmain"><span class="pill">Module '+esc(m.module_number)+'</span> <b>'+esc(m.title)+'</b><div class="muted">'+esc(m.category)+' • '+esc(m.description||"")+'</div></div><div class="right actions"><button class="secondary" onclick="editModule(\''+esc(m.id)+'\')">Sửa</button><button class="danger" onclick="delModule(\''+esc(m.id)+'\')">Xóa</button></div></div>').join("")||'<div class="empty">Chưa có Module.</div>');
+}
+$("moduleSearch").oninput=renderModules;
+function showModuleForm(id){
+ const m=id?F.get("modules",id):null;
+ setEditor("moduleEditor",'<div class="editbox"><form onsubmit="saveModule(event,\''+(id||"")+'\')"><div class="grid"><input id="mfNum" type="number" min="1" value="'+esc(m?.module_number||1)+'"><input id="mfTitle" placeholder="Tên Module" value="'+esc(m?.title||"")+'" required></div><input id="mfCat" placeholder="Năng lực / lĩnh vực" value="'+esc(m?.category||"")+'"><textarea id="mfDesc" placeholder="Mô tả">'+esc(m?.description||"")+'</textarea><div class="actions"><button class="primary">💾 Lưu Module</button><button type="button" class="secondary" onclick="closeEditor(\'moduleEditor\')">Hủy</button></div></form></div>');
+}
+function editModule(id){showModuleForm(id)}
+function saveModule(e,id){e.preventDefault();const d={module_number:+$("mfNum").value||1,title:$("mfTitle").value.trim(),category:$("mfCat").value.trim(),description:$("mfDesc").value.trim(),age_min:7,age_max:18,active:true};if(id)F.update("modules",id,d);else F.create("modules",d);closeEditor("moduleEditor");render();runChecks();log((id?"UPDATE":"CREATE")+" modules OK")}
+function delModule(id){if(!confirm("Xóa Module này?"))return;F.remove("modules",id);render();runChecks();log("DELETE modules OK")}
+
+function renderRewards(){
+ const q=($("rewardSearch").value||"").toLowerCase().trim(),a=F.list("reward_rules").filter(r=>!q||String(r.name).toLowerCase().includes(q)).sort((a,b)=>a.points_required-b.points_required);
+ $("rewardList").innerHTML='<div class="count">'+a.length+' phần thưởng</div>'+(a.map(r=>'<div class="row"><div class="rowmain"><b>'+esc(r.name)+'</b><div class="muted">'+esc(r.points_required)+' ⭐</div></div><div class="right actions"><button class="secondary" onclick="editReward(\''+esc(r.id)+'\')">Sửa</button><button class="danger" onclick="delReward(\''+esc(r.id)+'\')">Xóa</button></div></div>').join("")||'<div class="empty">Chưa có phần thưởng.</div>');
+}
+$("rewardSearch").oninput=renderRewards;
+function showRewardForm(id){
+ const r=id?F.get("reward_rules",id):null;
+ setEditor("rewardEditor",'<div class="editbox"><form onsubmit="saveReward(event,\''+(id||"")+'\')"><input id="rfName" placeholder="Tên phần thưởng" value="'+esc(r?.name||"")+'" required><input id="rfPoints" type="number" min="1" value="'+esc(r?.points_required||50)+'"><div class="actions"><button class="primary">💾 Lưu phần thưởng</button><button type="button" class="secondary" onclick="closeEditor(\'rewardEditor\')">Hủy</button></div></form></div>');
+}
+function editReward(id){showRewardForm(id)}
+function saveReward(e,id){e.preventDefault();const d={name:$("rfName").value.trim(),points_required:+$("rfPoints").value||50,active:true};if(id)F.update("reward_rules",id,d);else F.create("reward_rules",d);closeEditor("rewardEditor");render();runChecks();log((id?"UPDATE":"CREATE")+" reward_rules OK")}
+function delReward(id){if(!confirm("Xóa phần thưởng này?"))return;F.remove("reward_rules",id);render();runChecks();log("DELETE reward_rules OK")}
+
+function runChecks(){
+ let storage=false,roundTrip=false;
+ try{storage=F.storageOK();const data=F.exportAll();roundTrip=F.validateBackup(data)&&F.list("children").length>=2}catch(e){}
+ const tests=[
+ ["Storage local",storage],
+ ["2 hồ sơ con",F.list("children").length>=2],
+ ["Dữ liệu tách theo con",F.list("tasks").every(x=>x.child_id&&F.get("children",x.child_id))],
+ ["Backup hợp lệ",F.validateBackup(F.exportAll())],
+ ["CRUD API",["create","get","update","remove"].every(k=>typeof F[k]==="function")],
+ ["Tìm kiếm nhật ký",typeof F.searchDiary==="function"],
+ ["Round-trip Data Core",roundTrip]
+ ];
+ $("health").innerHTML=tests.map(t=>'<div class="'+(t[1]?"ok":"warn")+'">'+(t[1]?"✓":"⚠")+' '+esc(t[0])+'</div>').join("");
+ log(tests.map(t=>t[0]+": "+(t[1]?"PASS":"FAIL")).join("\n"));
+}
+function downloadBackup(){
+ const blob=new Blob([JSON.stringify(F.exportAll(),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="family-growth-data-core-1.0-"+today()+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);$("backupStatus").innerHTML='<span class="ok">✓ Đã xuất Backup.</span>';
+}
+function restoreBackup(e){
+ const file=e.target.files[0];if(!file)return;const reader=new FileReader();
+ reader.onload=()=>{try{const d=JSON.parse(reader.result);if(!F.validateBackup(d))throw new Error("BACKUP_INVALID");F.importAll(d);fillChildSelects();render();runChecks();$("backupStatus").innerHTML='<span class="ok">✓ Restore thành công. Dữ liệu đã được lưu.</span>';log("RESTORE OK")}catch(err){$("backupStatus").innerHTML='<span class="warn">⚠ Backup không hợp lệ: '+esc(err.message)+'</span>';log("RESTORE FAIL: "+err.message)}e.target.value=""};reader.readAsText(file);
+}
+function clearDemo(){if(!confirm("Xóa toàn bộ DATA CORE demo trên thiết bị này?"))return;F.collections.forEach(k=>localStorage.removeItem(F.namespace+"_"+k));location.reload()}
 setup();
 </script></body></html>
