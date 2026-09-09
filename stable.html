@@ -202,6 +202,6 @@ function toggleHabit(id,day){let m=S.modules.find(x=>x.id===id);if(!m)return;m.h
 function setReflection(id,rating){let m=S.modules.find(x=>x.id===id);if(!m)return;m.reflections??={ta:{},mt:{}};m.reflections[S.child]??={};m.reflections[S.child][de.value]??={note:''};m.reflections[S.child][de.value].rating=rating;save();render();}
 function saveReflection(id){let m=S.modules.find(x=>x.id===id);if(!m)return;m.reflections??={ta:{},mt:{}};m.reflections[S.child]??={};m.reflections[S.child][de.value]??={rating:''};m.reflections[S.child][de.value].note=document.getElementById('ref_'+id).value;save();render();}
 
-function render(){S.diaries??={ta:[],mt:[]}renderRewardDashboard();;S.diaries.ta??=[];S.diaries.mt??=[];S.notes??={ta:{},mt:{}};S.notes.ta??={};S.notes.mt??={};renderCurriculum();renderHome();renderTasks();renderProgress();renderRewards();renderParent();renderSchedule();renderHomeDiary()}
+function render(){S.diaries??={ta:[],mt:[]};renderRewardDashboard();S.diaries.ta??=[];S.diaries.mt??=[];S.notes??={ta:{},mt:{}};S.notes.ta??={};S.notes.mt??={};renderCurriculum();renderHome();renderTasks();renderProgress();renderRewards();renderParent();renderSchedule();renderHomeDiary()}
 const initialPage=location.hash.slice(1)||'home';navStack=[initialPage];navPos=0;go(initialPage,false);updateTimer();
 </script></body></html>
