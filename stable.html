@@ -159,7 +159,7 @@ function renderParent(){S.notes??={ta:{},mt:{}};S.notes.ta??={};S.notes.mt??={};
   html+='</table>';
   document.getElementById('stitle').textContent=cfg.title;
   document.getElementById('snote').textContent=cfg.teacher;
-  document.getElementById('stable').innerHTML=html;
+  document.getElementById('stable').innerHTML=html;const center=document.getElementById('center');if(center)center.style.display=child==='ta'?'block':'none';
   const extra=document.getElementById('clubSchedule');
   if(!extra)return;
   extra.style.display='block';
