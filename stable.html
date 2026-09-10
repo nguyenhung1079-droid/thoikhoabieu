@@ -162,6 +162,7 @@ function renderParent(){S.notes??={ta:{},mt:{}};S.notes.ta??={};S.notes.mt??={};
   document.getElementById('stable').innerHTML=html;
   const extra=document.getElementById('clubSchedule');
   if(!extra)return;
+  extra.style.display='block';
   extra.innerHTML=child==='ta'
     ? '<h3>📚 Học thêm / phụ đạo tại Trung tâm</h3><div class="tc">Thứ 2 • 13:30–15:00 • Toán phụ đạo tại Trung tâm</div><div class="tc">Thứ 4 • 17:00–18:30 • Toán phụ đạo tại Trung tâm</div><div class="tc">Thứ 5 • 13:30–15:00 • Ngữ văn phụ đạo tại Trung tâm</div><div class="tc">Thứ 5 • 15:15–16:45 • Tiếng Anh phụ đạo tại Trung tâm</div><div class="tc">Thứ 6 • 13:30–15:00 • Ngữ văn phụ đạo tại Trung tâm</div>'
     : '<h3>📚 Câu lạc bộ ngoài giờ – Minh Trường</h3><div class="tc">Thứ 2 • 16:00–17:00 • Giáo dục kỹ năng • STEM • Công dân số • Hoàn thành bài tập & tăng cường luyện tập</div><div class="tc">Thứ 3–Thứ 5 • 15:30–16:40 • Giáo dục kỹ năng • STEM • Công dân số • Hoàn thành bài tập & tăng cường luyện tập</div><h3>🎨 Câu lạc bộ năng khiếu</h3><div class="tc">Thứ 2 • 17:00–18:30 • Nhảy • Đàn • Mĩ thuật • Bóng rổ (lịch sẽ bổ sung sau)</div><div class="tc">Thứ 3–Thứ 5 • 16:40–18:00 • Nhảy • Đàn • Mĩ thuật • Bóng rổ (lịch sẽ bổ sung sau)</div>';
