@@ -117,10 +117,13 @@ function forward(){if(navPos<navStack.length-1){navPos++;go(navStack[navPos],fal
 onpopstate=()=>{const id=location.hash.slice(1)||'home';const i=navStack.indexOf(id);if(i>=0)navPos=i;else{navStack.push(id);navPos=navStack.length-1}go(id,false)}
 function addTask(e){e.preventDefault();db().tasks.push({text:document.getElementById('task').value,points:+document.getElementById('points').value||10,done:false});save();document.getElementById('task').value='';render()}function toggle(i){db().tasks[i].done=!db().tasks[i].done;save();render()}function del(i){db().tasks.splice(i,1);save();render()}function points(){return db().tasks.filter(x=>x.done).reduce((a,x)=>a+x.points,0)}function streak(){let n=0,d=new Date(de.value+'T12:00:00');while(true){let q=S.days[S.child]?.[iso(d)];if(!q?.tasks?.length||q.tasks.some(x=>!x.done))break;n++;d.setDate(d.getDate()-1)}return n}function weekly(){let d=new Date(de.value+'T12:00:00');d.setDate(d.getDate()-((d.getDay()+6)%7));let a=[],p=0;for(let i=0;i<7;i++){let x=new Date(d);x.setDate(d.getDate()+i);let q=S.days[S.child]?.[iso(x)]||{tasks:[]},z=q.tasks.filter(t=>t.done),v=z.reduce((s,t)=>s+t.points,0);a.push([z.length,q.tasks.length,v]);p+=v}return[a,p]}function timeline(){let d=new Date(de.value+'T12:00:00'),w=d.getDay(),a=[];if(w<1||w>6)return a;let ar=S.child==='ta'?TA[w]:MT[w];
 if(S.child==='ta'){
-a=[['05:30','06:00','🏃 Thể chất 05:30 • <a href="https://meet.google.com/zzs-bxwi-hmp" target="_blank" rel="noopener" class="timelineLink">Vào lớp →</a>'],['06:00','06:30','🏃 Thể chất 06:00 • <a href="https://meet.google.com/ixr-rsxe-hsx" target="_blank" rel="noopener" class="timelineLink">Vào lớp →</a>'],['07:00','07:15','Đến trường'],['07:15','07:30','Truy bài']];
+a=[['05:30','06:00','🏃 Thể chất 05:30 • <a href="https://meet.google.com/zzs-bxwi-hmp" target="_blank" rel="noopener" class="timelineLink">Vào lớp →</a>'],['06:00','06:30','🏃 Thể chất 06:00 • <a href="https://meet.google.com/ixr-rsxe-hsx" target="_blank" rel="noopener" class="timelineLink">Vào lớp →</a>'],['07:00','07:15','🌞 Đến trường'],['07:15','07:30','📖 Truy bài']];
 const taTimes=[['07:30','08:15'],['08:15','09:05'],['09:20','10:05'],['10:10','10:55'],['11:00','11:45']];
 ar.forEach((m,i)=>{if(m)a.push([taTimes[i][0],taTimes[i][1],'🏫 Tiết '+(i+1)+' • '+m])});
-a.push(['11:45','13:00','🍚 Ăn + nghỉ trưa'],['13:00','13:15','Đến trường'],['13:15','13:30','Truy bài']);
+a.push(['11:45','13:30','🍚 Ăn trưa + nghỉ trưa • Sau đó về nhà']);
+if(w===1)a.push(['13:30','15:00','📐 Học thêm Toán • Trung tâm']);
+else if(w===3)a.push(['17:00','18:30','📐 Học thêm Toán • Trung tâm']);
+else if(w===4)a.push(['15:15','16:45','🇬🇧 Học thêm Tiếng Anh • Trung tâm']);
 return a}
 if(S.child==='mt'){
 a=[['07:20','07:40','🌞 Chuẩn bị vào lớp']];
