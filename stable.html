@@ -92,7 +92,7 @@
 <div class="actions" style="margin-top:10px"><input id="moduleSearch" placeholder="Tìm Module..." oninput="renderCurriculum()" style="flex:1;padding:10px;border:1px solid var(--ln);border-radius:10px"><button class="primary" onclick="openModuleForm()">＋ Module mới</button><button class="btn" onclick="openTemplatePack()">📦 Bộ Module mẫu</button></div>
 </div><div id="moduleList"></div>
 <div id="moduleEditor" class="card" style="display:none"></div>
-</section><section id="schedule" class="page"><div class="card"><div class="mut">FAMILY GROWTH • SCHOOL SCHEDULE</div><h2 id="stitle">🏫 Thời khóa biểu</h2><div class="mut" id="snote"></div><div class="switch" style="margin-top:10px"><button class="btn" onclick="setChild('ta')">🔵 Tuấn Anh • 7A5</button><button class="btn" onclick="setChild('mt')">🟢 Minh Trường • 1D4</button></div><div id="stable" class="table" style="margin-top:10px"></div></div><div id="center" class="card"><h2>🎓 Trung tâm – Tuấn Anh</h2><div class="table"><table><tr><th>Thứ</th><th>Thời gian</th><th>Nội dung</th></tr><tr><td>Thứ 2</td><td>13:30–15:00</td><td>Toán phụ đạo tại Trung tâm</td></tr><tr><td>Thứ 4</td><td>17:00–18:30</td><td>Toán phụ đạo tại Trung tâm</td></tr><tr><td>Thứ 5</td><td>13:30–15:00</td><td>Ngữ văn phụ đạo tại Trung tâm</td></tr><tr><td>Thứ 5</td><td>15:15–16:45</td><td>Tiếng Anh phụ đạo tại Trung tâm</td></tr><tr><td>Thứ 6</td><td>13:30–15:00</td><td>Ngữ văn phụ đạo tại Trung tâm</td></tr></table></div></div></div><div id="clubSchedule" class="card" style="margin-top:10px"></div></section>
+</section><section id="schedule" class="page"><div class="card"><div class="mut">FAMILY GROWTH • SCHOOL SCHEDULE</div><h2 id="stitle">🏫 Thời khóa biểu</h2><div class="mut" id="snote"></div><div class="switch" style="margin-top:10px"><button class="btn" onclick="setChild('ta')">🔵 Tuấn Anh • 7A5</button><button class="btn" onclick="setChild('mt')">🟢 Minh Trường • 1D4</button></div><div id="stable" class="table" style="margin-top:10px"></div></div><div id="center" class="card"><h2>🎓 Trung tâm – Tuấn Anh</h2><div class="table"><table><tr><th>Thứ</th><th>Thời gian</th><th>Nội dung</th></tr><tr><td>Thứ 4</td><td>Chiều – Tiết 3, 4</td><td>Tiếng Anh phụ đạo</td></tr><tr><td>Thứ 7</td><td>Chiều – Tiết 1, 2</td><td>Ngữ văn phụ đạo</td></tr><tr><td>Thứ 7</td><td>Chiều – Tiết 3, 4</td><td>Toán phụ đạo <span class="mut">(Học ngay sau tiết Văn)</span></td></tr></table></div></div></div><div id="clubSchedule" class="card" style="margin-top:10px"></div></section>
 </main><nav class="bottom" aria-label="Điều hướng chính"><div class="bottomin"><button onclick="go('home')">🏠<br>Home</button><button onclick="go('tasks')">🎯<br>Today</button><button onclick="go('schedule')">🏫<br>TKB</button><button onclick="go('curriculum')">📚<br>Module</button><button onclick="go('progress')">📈<br>Growth</button><button onclick="go('reward')">🏆<br>Reward</button><button onclick="go('parent')">👨‍👩‍👦<br>Parent</button><button onclick="go('parent')">💾<br>Backup</button></div></nav>
 <script>
 window.addEventListener('error',e=>{const x=document.getElementById('fgsError');if(x){x.style.display='block';document.getElementById('fgsErrorText').textContent=(e.message||'Lỗi không xác định')+' — dòng '+(e.lineno||'?')}});
@@ -129,9 +129,8 @@ a=[['05:30','06:00','🏃 Thể chất 05:30 • <a href="https://meet.google.co
 const taTimes=[['07:30','08:15'],['08:15','09:05'],['09:20','10:05'],['10:10','10:55'],['11:00','11:45']];
 ar.forEach((m,i)=>{if(m)a.push([taTimes[i][0],taTimes[i][1],'🏫 Tiết '+(i+1)+' • '+m])});
 a.push(['11:45','13:30','🍚 Ăn trưa + nghỉ trưa • Sau đó về nhà']);
-if(w===1)a.push(['13:30','15:00','📐 Học thêm Toán • Trung tâm']);
-else if(w===3)a.push(['17:00','18:30','📐 Học thêm Toán • Trung tâm']);
-else if(w===4)a.push(['15:15','16:45','🇬🇧 Học thêm Tiếng Anh • Trung tâm']);
+if(w===3)a.push(['Chiều','Tiết 3–4','🇬🇧 Tiếng Anh phụ đạo • Trung tâm']);
+else if(w===6)a.push(['Chiều','Tiết 1–2','📚 Ngữ văn phụ đạo • Trung tâm'],['Chiều','Tiết 3–4','📐 Toán phụ đạo • Trung tâm • Học ngay sau tiết Văn']);
 return a}
 if(S.child==='mt'){
 a=[['07:20','07:40','🌞 Chuẩn bị vào lớp']];
