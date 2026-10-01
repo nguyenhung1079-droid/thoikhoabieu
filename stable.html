@@ -129,7 +129,7 @@ a=[['05:30','06:00','🏃 Thể chất 05:30 • <a href="https://meet.google.co
 const taTimes=[['07:30','08:15'],['08:15','09:05'],['09:20','10:05'],['10:10','10:55'],['11:00','11:45']];
 ar.forEach((m,i)=>{if(m)a.push([taTimes[i][0],taTimes[i][1],'🏫 Tiết '+(i+1)+' • '+m])});
 a.push(['11:45','13:30','🍚 Ăn trưa + nghỉ trưa • Sau đó về nhà']);
-if(w===1)a.push(['13:30','Ca 1','💳 Toán • Trung tâm mất phí • Số 63 ngõ 39']);
+if(w===1)a.push(['13:30','Ca 1','💳 Toán • Trung tâm mất phí • Số 63 ngõ 39 Đông Thắng']);
 if(w===4)a.push(['13:30','Ca 1','💳 Ngữ Văn • Trung tâm mất phí • 80 Kẻ Vẽ'],['15:15','16:46','💳 Tiếng Anh • Trung tâm mất phí • 80 Kẻ Vẽ']);
 if(w===5)a.push(['13:30','Ca 1','💳 Ngữ Văn • Trung tâm mất phí • 80 Kẻ Vẽ'],['15:15','16:46','💳 Toán • Trung tâm mất phí • 80 Kẻ Vẽ']);
 if(w===2||w===5)a.push(['17:40','19:00','🥋 CLB Võ thuật']);
@@ -194,7 +194,7 @@ function renderParent(){S.notes??={ta:{},mt:{}};S.notes.ta??={};S.notes.mt??={};
   document.getElementById('stable').innerHTML=html;const center=document.getElementById('center');if(center)center.style.display=child==='ta'?'block':'none';
   const extra=document.getElementById('clubSchedule');
   if(!extra)return;
-  if(child==='ta'){extra.style.display='block';extra.innerHTML='<h3>💳 Lịch học Trung tâm mất phí – Tuấn Anh</h3><div class="tc"><b>Thứ 2 • Ca 1 từ 13:30</b><br>Toán • Số 63 ngõ 39</div><div class="tc"><b>Thứ 5 • Ca 1 từ 13:30</b><br>Ngữ Văn • 80 Kẻ Vẽ</div><div class="tc"><b>Thứ 5 • Ca 2 • 15:15–16:46</b><br>Tiếng Anh • 80 Kẻ Vẽ</div><div class="tc"><b>Thứ 6 • Ca 1 từ 13:30</b><br>Ngữ Văn • 80 Kẻ Vẽ</div><div class="tc"><b>Thứ 6 • Ca 2 • 15:15–16:46</b><br>Toán • 80 Kẻ Vẽ</div><h3 style="margin-top:16px">🥋 CLB Võ thuật – Tuấn Anh</h3><div class="tc">Thứ 3 • 17:40–19:00 • CLB Võ thuật</div><div class="tc">Thứ 6 • 17:40–19:00 • CLB Võ thuật</div>';return;}
+  if(child==='ta'){extra.style.display='block';extra.innerHTML='<h3>💳 Lịch học Trung tâm mất phí – Tuấn Anh</h3><div class="tc"><b>Thứ 2 • Ca 1 từ 13:30</b><br>Toán • Số 63 ngõ 39 Đông Thắng</div><div class="tc"><b>Thứ 5 • Ca 1 từ 13:30</b><br>Ngữ Văn • 80 Kẻ Vẽ</div><div class="tc"><b>Thứ 5 • Ca 2 • 15:15–16:46</b><br>Tiếng Anh • 80 Kẻ Vẽ</div><div class="tc"><b>Thứ 6 • Ca 1 từ 13:30</b><br>Ngữ Văn • 80 Kẻ Vẽ</div><div class="tc"><b>Thứ 6 • Ca 2 • 15:15–16:46</b><br>Toán • 80 Kẻ Vẽ</div><h3 style="margin-top:16px">🥋 CLB Võ thuật – Tuấn Anh</h3><div class="tc">Thứ 3 • 17:40–19:00 • CLB Võ thuật</div><div class="tc">Thứ 6 • 17:40–19:00 • CLB Võ thuật</div>';return;}
   extra.style.display='block';
   extra.innerHTML='<h3>📚 Câu lạc bộ ngoài giờ – Minh Trường</h3><div class="tc">Thứ 2 • 16:00–17:00 • Giáo dục kỹ năng • STEM • Công dân số • Hoàn thành bài tập & tăng cường luyện tập</div><div class="tc">Thứ 3–Thứ 5 • 15:30–16:40 • Giáo dục kỹ năng • STEM • Công dân số • Hoàn thành bài tập & tăng cường luyện tập</div><h3>🎨 Câu lạc bộ năng khiếu</h3><div class="tc">Thứ 2 • 17:00–18:30 • Nhảy • Đàn • Mĩ thuật • Bóng rổ (lịch sẽ bổ sung sau)</div><div class="tc">Thứ 3–Thứ 5 • 16:40–18:00 • Nhảy • Đàn • Mĩ thuật • Bóng rổ (lịch sẽ bổ sung sau)</div>';
 }
